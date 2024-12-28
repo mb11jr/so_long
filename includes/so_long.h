@@ -6,40 +6,30 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 14:30:52 by mbentale          #+#    #+#             */
-/*   Updated: 2024/12/26 09:01:13 by mbentale         ###   ########.fr       */
+/*   Updated: 2024/12/28 10:22:39 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-#include <stdlib.h>
+# include <mlx.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <fcntl.h>
+# include "../get_next_line/get_next_line.h"
+# include "../ft_printf/include/ft_printf.h"
 
-#define WINDOW_HEIGHT 720
-#define WINDOW_WIDTH 1280
+# include "structures.h"
 
+# define WINDOW_HEIGHT 720
+# define WINDOW_WIDTH 1280
+# define TILE_SIZE 
 
-typedef struct	s_obj {
-    void    *img;
-	int		width;
-	int		height;
-	int		x;
-	int		y;
-	struct s_obj	*next;
-    // char    *addr;
-    // int     bits_per_pixel;
-    // int     line_length;
-    // int     endian;
-}				t_obj;
-
-typedef struct  s_vars
-{
-	void	*mlx;
-	void	*win;
-    t_obj    *img;
-}               t_vars;
-
-#define IMG00 "./assets/images/IMG00.xpm"
+#define IMG00 "./textures/IMG00.xpm"
 
 
 #endif

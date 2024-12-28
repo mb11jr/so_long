@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 12:26:51 by mbentale          #+#    #+#             */
-/*   Updated: 2024/11/06 14:57:55 by mbentale         ###   ########.fr       */
+/*   Updated: 2024/12/28 09:50:31 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
+# include <stdint.h>
 
 typedef struct s_list
 {
