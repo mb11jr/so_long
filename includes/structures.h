@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 09:57:13 by mbentale          #+#    #+#             */
-/*   Updated: 2024/12/28 09:58:31 by mbentale         ###   ########.fr       */
+/*   Updated: 2024/12/28 12:30:41 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 
 typedef struct s_map
 {
-	int	width;
-	int	height;
-}	t_game;
+	char	*path;
+	char	**content;
+	int		width;
+	int		height;
+}	t_map;
 
 typedef struct	s_obj
 {
@@ -37,7 +39,8 @@ typedef struct  s_vars
 {
 	void	*mlx;
 	void	*win;
-    t_obj    *img;
+    t_obj	*img;
+	t_map	*map;
 }               t_vars;
 
 #endif
