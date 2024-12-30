@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 14:30:52 by mbentale          #+#    #+#             */
-/*   Updated: 2024/12/28 12:32:10 by mbentale         ###   ########.fr       */
+/*   Updated: 2024/12/29 12:54:39 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,12 @@
 
 # define WINDOW_HEIGHT 720
 # define WINDOW_WIDTH 1280
-# define TILE_SIZE 50
-# define IMG00 "./textures/IMG00.xpm"
+# define TILE_SIZE 48
+# define BACKGROUND "./textures/Background/background.xpm"
+# define WALL "./textures/Background/wall.xpm"
+# define PLAYER "./textures/Player/IdlePlayer.xpm"
 
 char    **read_map(const char *filename);
+int     total_width(char *filename);
+int     total_height(char *filename);
 #endif
