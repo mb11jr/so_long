@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 09:57:13 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/02 11:44:16 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/02 12:16:03 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,8 @@ typedef struct  s_vars
 	void		*win;
 	int			win_width;
 	int			win_height;
-	t_obj		*base_image;
-	t_obj		*image;
 	t_map		*map;
+	t_obj		*base_image;
 	t_obj		*background;
     t_obj		*wall;
 	t_obj		*player;
