@@ -1,16 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   image_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:36:31 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/02 16:14:36 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/02 20:55:06 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+t_obj	*add_image(t_vars *vars, char *filename, t_obj *img)
+{
+	img = malloc(sizeof(t_obj));
+	if (!img)
+		return (NULL);
+	img->img = mlx_xpm_file_to_image(vars->mlx, filename, &img->width, &img->height);
+	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel, &img->line_length, &img->endian);
+	return (img);
+}
 
 void	get_position(t_vars *vars)
 {
@@ -34,7 +44,7 @@ void	get_position(t_vars *vars)
 	}
 }
 
-void	put_pixel_img(t_vars *vars, t_obj *img, int x, int y, int color)
+void	put_pixel_img(t_vars *vars, int x, int y, int color)
 {
 	char	*pxl;
 
@@ -42,7 +52,7 @@ void	put_pixel_img(t_vars *vars, t_obj *img, int x, int y, int color)
 		return ;
 	if (x >= 0 && x < vars->win_width && y >= 0 && y < vars->win_height)
 	{
-		pxl = img->addr + (y * img->line_length + x * img->bits_per_pixel / 8);
+		pxl = vars->base_image->addr + (y * vars->base_image->line_length + x * vars->base_image->bits_per_pixel / 8);
 		*(unsigned int*)pxl = color;
 	}
 }
@@ -52,7 +62,7 @@ unsigned int	get_pixel_img(t_obj *img, int x, int y)
 	return (*(unsigned int*)(img->addr + y * img->line_length + x * img->bits_per_pixel / 8));
 }
 
-void	put_img_to_img(t_vars *vars, t_obj *dst, t_obj *src, int x, int y)
+void	put_img_to_img(t_vars *vars, t_obj *src, int x, int y)
 {
 	int	i;
 	int	j;
@@ -63,7 +73,7 @@ void	put_img_to_img(t_vars *vars, t_obj *dst, t_obj *src, int x, int y)
 		j = 0;
 		while (j < src->height)
 		{
-			put_pixel_img(vars, dst, x + i, y + j, get_pixel_img(src, i, j));
+			put_pixel_img(vars, x + i, y + j, get_pixel_img(src, i, j));
 			j++;
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 09:57:13 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/02 12:16:03 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/02 21:20:09 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ typedef struct s_map
 {
 	char	*path;
 	char	**content;
-	int		width;
-	int		height;
 }	t_map;
 
 
@@ -48,6 +46,7 @@ typedef struct  s_vars
     t_obj		*wall;
 	t_obj		*player;
 	t_obj		*token;
+	t_obj		*exit;
 }				t_vars;
 
 #endif
