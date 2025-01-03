@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 14:30:52 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/02 21:21:51 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/03 10:43:40 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,7 @@
 # define COLLECTIBLE "./textures/Background/key0.xpm"
 # define EXIT "./textures/Background/exit.xpm"
 
-void            read_map(t_vars *vars);
-int				map_width(t_vars *vars);
-int				map_height(t_vars *vars);
+void            read_map(t_vars *vars, char *path);
 t_obj			*add_image(t_vars *vars, char *filename, t_obj *img);
 void			get_position(t_vars *vars);
 void			put_pixel_img(t_vars *vars, int x, int y, int color);

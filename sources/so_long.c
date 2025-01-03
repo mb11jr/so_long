@@ -6,12 +6,20 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 09:53:36 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/02 21:36:51 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/03 10:45:56 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+// void	update_player_position(t_vars *vars)
+// {
+// 	int	x;
+// 	int y;
+
+	
+// 	if (vars->map[])
+// }
 int	keypress_handler(int keycode, t_vars *vars)
 {
 	if (keycode == XK_Escape)
@@ -68,17 +76,13 @@ int	main(void)
 {
 	t_vars	vars;
 
-	vars.map = malloc(sizeof(t_map));
-	vars.map->path = "maps/map0.ber";
-	vars.win_height = TILE_SIZE * map_height(&vars);
-	vars.win_width = TILE_SIZE * map_width(&vars);
 	vars.mlx = mlx_init();
 	load_images(&vars);
+	read_map(&vars, "maps/map0.ber");
 	vars.win = mlx_new_window(vars.mlx, vars.win_width, vars.win_height,
 			"Welcome to my 2D game");
-	read_map(&vars);
 	get_position(&vars);
-	vars.map->content[vars.player->y / TILE_SIZE][vars.player->x / TILE_SIZE] = '0';
+	vars.map[vars.player->y / TILE_SIZE][vars.player->x / TILE_SIZE] = '0';
 	mlx_hook(vars.win, KeyPress, KeyPressMask, keypress_handler, &vars);
 	mlx_hook(vars.win, DestroyNotify, NoEventMask, close_handler, &vars);
 	mlx_loop_hook(vars.mlx, render_game, &vars);

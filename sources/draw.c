@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 17:44:20 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/02 21:35:47 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/03 10:45:56 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ int	draw_background(t_vars *vars)
 	int	y;
 
 	y = 0;
-	while (vars->map->content[y])
+	while (vars->map[y])
 	{
 		x = 0;
-		while (vars->map->content[y][x])
+		while (vars->map[y][x])
 		{
-			if (vars->map->content[y][x] == '0' || vars->map->content[y][x] == 'C' || vars->map->content[y][x] == 'E')
+			if (vars->map[y][x] == '0' || vars->map[y][x] == 'C' || vars->map[y][x] == 'E')
 			{
 				put_img_to_img(vars, vars->background, x * TILE_SIZE, y * TILE_SIZE);
 			}
@@ -40,12 +40,12 @@ int	draw_wall(t_vars *vars)
 	int	y;
 
 	y = 0;
-	while (vars->map->content[y])
+	while (vars->map[y])
 	{
 		x = 0;
-		while (vars->map->content[y][x])
+		while (vars->map[y][x])
 		{
-			if (vars->map->content[y][x] == '1')
+			if (vars->map[y][x] == '1')
 			{
 				put_img_to_img(vars, vars->wall, x * TILE_SIZE, y * TILE_SIZE);
 			}
@@ -68,12 +68,12 @@ int	draw_token(t_vars *vars)
 	int	y;
 
 	y = 0;
-	while (vars->map->content[y])
+	while (vars->map[y])
 	{
 		x = 0;
-		while (vars->map->content[y][x])
+		while (vars->map[y][x])
 		{
-			if (vars->map->content[y][x] == 'C')
+			if (vars->map[y][x] == 'C')
 			{
 				put_img_to_img(vars, vars->token, x * TILE_SIZE, y * TILE_SIZE);
 			}
@@ -90,12 +90,12 @@ int	draw_exit(t_vars *vars)
 	int	y;
 
 	y = 0;
-	while (vars->map->content[y])
+	while (vars->map[y])
 	{
 		x = 0;
-		while (vars->map->content[y][x])
+		while (vars->map[y][x])
 		{
-			if (vars->map->content[y][x] == 'E')
+			if (vars->map[y][x] == 'E')
 			{
 				put_img_to_img(vars, vars->exit, x * TILE_SIZE, y * TILE_SIZE);
 			}

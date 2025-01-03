@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:36:31 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/02 20:55:06 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/03 10:45:56 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ void	get_position(t_vars *vars)
 	int	y;
 
 	y = 0;
-	while (vars->map->content[y])
+	while (vars->map[y])
 	{
 		x = 0;
-		while (vars->map->content[y][x])
+		while (vars->map[y][x])
 		{
-			if (vars->map->content[y][x] == 'P')
+			if (vars->map[y][x] == 'P')
 			{
 				vars->player->x = x * TILE_SIZE;
 				vars->player->y = y * TILE_SIZE;		
