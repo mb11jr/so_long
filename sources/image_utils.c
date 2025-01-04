@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:36:31 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/03 10:45:56 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/04 14:41:00 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,11 @@ void	get_position(t_vars *vars)
 				vars->player->x = x * TILE_SIZE;
 				vars->player->y = y * TILE_SIZE;		
 			}
+			// if (vars->map[y][x] == '1')
+			// {
+			// 	vars->wall->x = x * TILE_SIZE;
+			// 	vars->wall->y = y * TILE_SIZE;
+			// }
 			x++;
 		}
 		y++;

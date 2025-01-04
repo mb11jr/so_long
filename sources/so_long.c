@@ -6,37 +6,89 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 09:53:36 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/03 10:45:56 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/04 17:44:35 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-// void	update_player_position(t_vars *vars)
-// {
-// 	int	x;
-// 	int y;
+void	update_player_position(t_vars *vars)
+{
+	// int count;
+	// count = 0;
+	if (vars->map[vars->player->y / TILE_SIZE][vars->player->x
+		/ TILE_SIZE] == 'C')
+	{
+		++vars->collected;
+		// ft_printf("Collected items: %d\n", vars->collected);
+		vars->map[vars->player->y / TILE_SIZE][vars->player->x
+			/ TILE_SIZE] = '0';
+		// if (vars->map[vars->player->y / TILE_SIZE][vars->player->x / TILE_SIZE] == 'E')
+			
+	}
+}
+
+int	do_overlap(int ax, int ay, int bx, int by)
+{
+	if (ax + TILE_SIZE <= bx || ax >= bx + TILE_SIZE)
+		return (0);
+	if (ay + TILE_SIZE <= by || ay >= by + TILE_SIZE)
+		return (0);
+	return (1);
+}
 
 	
 // 	if (vars->map[])
 // }
+
+// 	if (vars->map[])
+// }
 int	keypress_handler(int keycode, t_vars *vars)
 {
+	int new_x = vars->player->x;
+	int new_y = vars->player->y;
+	ft_printf("Total moves: %d\n", ++vars->moves);
 	if (keycode == XK_Escape)
 	{
 		mlx_destroy_window(vars->mlx, vars->win);
 		exit(0);
 	}
-	if ((keycode == XK_w || keycode == XK_Up) && vars->player->y > 0)
-		vars->player->y -= TILE_SIZE / 2;
-	if ((keycode == XK_a || keycode == XK_Left) && vars->player->x > 0)
-		vars->player->x -= TILE_SIZE / 2;
-	if ((keycode == XK_s || keycode == XK_Down) && vars->player->y
-		+ vars->player->height < vars->win_height)
-		vars->player->y += TILE_SIZE / 2;
-	if ((keycode == XK_d || keycode == XK_Right) && vars->player->x
-		+ vars->player->width < vars->win_width)
-		vars->player->x += TILE_SIZE / 2;
+	if (keycode == XK_w || keycode == XK_Up)
+		new_y -= SPEED;
+	if (keycode == XK_a || keycode == XK_Left)
+		new_x -= SPEED;
+	if (keycode == XK_s || keycode == XK_Down)
+		new_y += SPEED;
+	if (keycode == XK_d || keycode == XK_Right)
+		new_x += SPEED;
+
+	int x, y;
+	y = 0;
+	while (vars->map[y])
+	{
+		x = 0;
+		while (vars->map[y][x])
+		{
+			char tile = vars->map[y][x];
+			if ((tile == '1' || (tile == 'E' && vars->collected < vars->total_collectibles)) && do_overlap(new_x, new_y, x * TILE_SIZE, y * TILE_SIZE))
+			{
+				return (0);
+			}
+			x++;
+		}
+		y++;
+	}
+	vars->player->x = new_x;
+	vars->player->y = new_y;
+	update_player_position(vars);
+
+	if (vars->map[vars->player->y / TILE_SIZE][vars->player->x / TILE_SIZE] == 'E' &&
+		vars->collected == vars->total_collectibles)
+	{
+		ft_printf("Congratulations! YOU HAVE WON!\n");
+		mlx_destroy_window(vars->mlx, vars->win);
+		exit(0);
+	}
 	return (0);
 }
 
@@ -76,6 +128,9 @@ int	main(void)
 {
 	t_vars	vars;
 
+	vars.collected = 0;
+	vars.moves = 0;
+	total_collectibles(&vars, "maps/map0.ber");
 	vars.mlx = mlx_init();
 	load_images(&vars);
 	read_map(&vars, "maps/map0.ber");

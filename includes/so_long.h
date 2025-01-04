@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 14:30:52 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/03 10:43:40 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/04 18:00:20 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,20 @@
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <fcntl.h>
+# include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 
-# define WINDOW_HEIGHT 720
-# define WINDOW_WIDTH 1280
 # define TILE_SIZE 48
+# define SPEED 24
 # define BACKGROUND "./textures/Background/Background01.xpm"
 # define WALL "./textures/Background/Wall01.xpm"
-# define PLAYER "./textures/Player/shroom.xpm"
+# define PLAYER "./textures/Player/shroom2.xpm"
 # define COLLECTIBLE "./textures/Background/key0.xpm"
 # define EXIT "./textures/Background/exit.xpm"
 
-void            read_map(t_vars *vars, char *path);
+void			read_map(t_vars *vars, char *path);
 t_obj			*add_image(t_vars *vars, char *filename, t_obj *img);
 void			get_position(t_vars *vars);
 void			put_pixel_img(t_vars *vars, int x, int y, int color);
@@ -44,5 +44,6 @@ int				draw_wall(t_vars *vars);
 int				draw_player(t_vars *vars);
 int				draw_token(t_vars *vars);
 int				render_game(t_vars *vars);
+void			total_collectibles(t_vars *vars, char *path);
 
 #endif

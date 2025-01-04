@@ -6,11 +6,33 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 14:34:15 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/03 10:51:28 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/04 16:14:52 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	total_collectibles(t_vars *vars, char *path)
+{
+	int x;
+	int y;
+	int count;
+
+	count = 0;
+	read_map(vars, path);
+	y = 0;
+	while(vars->map[y])
+	{
+		x = 0;
+		while(vars->map[y][x])
+		{
+			if (vars->map[y][x] == 'C')
+				vars->total_collectibles = ++count;
+			x++;	
+		}
+	y++;	
+	}
+}
 
 void	read_map(t_vars *vars, char *path)
 {
