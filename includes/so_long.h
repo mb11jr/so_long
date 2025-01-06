@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 14:30:52 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/04 18:00:20 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/05 13:42:44 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@
 
 # define TILE_SIZE 48
 # define SPEED 24
-# define BACKGROUND "./textures/Background/Background01.xpm"
-# define WALL "./textures/Background/Wall01.xpm"
-# define PLAYER "./textures/Player/shroom2.xpm"
+# define BACKGROUND "./textures/Background/background.xpm"
+# define WALL "./textures/Background/wall.xpm"
+# define PLAYER "./textures/Player/pirate.xpm"
 # define COLLECTIBLE "./textures/Background/key0.xpm"
-# define EXIT "./textures/Background/exit.xpm"
+# define EXIT "./textures/Exit/exit00.xpm"
 
 void			read_map(t_vars *vars, char *path);
 t_obj			*add_image(t_vars *vars, char *filename, t_obj *img);
@@ -42,8 +42,9 @@ void			put_img_to_img(t_vars *vars, t_obj *src, int x, int y);
 int				draw_background(t_vars *vars);
 int				draw_wall(t_vars *vars);
 int				draw_player(t_vars *vars);
-int				draw_token(t_vars *vars);
+int				draw_collectible(t_vars *vars);
 int				render_game(t_vars *vars);
 void			total_collectibles(t_vars *vars, char *path);
+void	map_parser(t_vars *vars, char *path);
 
 #endif

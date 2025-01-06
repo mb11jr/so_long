@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 09:53:36 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/04 17:44:35 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/05 12:26:05 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,6 @@ int	do_overlap(int ax, int ay, int bx, int by)
 	return (1);
 }
 
-	
-// 	if (vars->map[])
-// }
-
-// 	if (vars->map[])
-// }
 int	keypress_handler(int keycode, t_vars *vars)
 {
 	int new_x = vars->player->x;
@@ -102,34 +96,23 @@ int	close_handler(t_vars *vars)
 void	load_images(t_vars *vars)
 {
 	vars->base_image = NULL;
-	// vars->wall = malloc(sizeof(t_obj));
-	// if (!vars->wall)
-	// {
-	// 	free(vars->map);
-	// 	free(vars->wall);
-	// }
-	// vars->player = malloc(sizeof(t_obj));
-	// if (!vars->player)
-	// {
-	// 	free(vars->map);
-	// 	free(vars->wall);
-	// 	free(vars->player);
-	// }
-	// vars->background = malloc(sizeof(t_obj));
-	// vars->token = malloc(sizeof(t_obj));
 	vars->background = add_image(vars, BACKGROUND, vars->background);
 	vars->wall = add_image(vars, WALL, vars->wall);
 	vars->player = add_image(vars, PLAYER, vars->player);
-	vars->token = add_image(vars, COLLECTIBLE, vars->token);
+	vars->collectible = add_image(vars, COLLECTIBLE, vars->collectible);
 	vars->exit = add_image(vars, EXIT, vars->exit);
 }
-
+void	game_init(t_vars *vars)
+{
+	vars->collected = 0;
+	vars->moves = 0;
+	
+}
 int	main(void)
 {
 	t_vars	vars;
 
-	vars.collected = 0;
-	vars.moves = 0;
+	game_init(&vars);
 	total_collectibles(&vars, "maps/map0.ber");
 	vars.mlx = mlx_init();
 	load_images(&vars);

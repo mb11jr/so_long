@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 17:44:20 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/04 14:32:06 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/05 11:08:22 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	draw_player(t_vars *vars)
 	return (0);
 }
 
-int	draw_token(t_vars *vars)
+int	draw_collectible(t_vars *vars)
 {
 	int	x;
 	int	y;
@@ -75,7 +75,7 @@ int	draw_token(t_vars *vars)
 		{
 			if (vars->map[y][x] == 'C')
 			{
-				put_img_to_img(vars, vars->token, x * TILE_SIZE, y * TILE_SIZE);
+				put_img_to_img(vars, vars->collectible, x * TILE_SIZE, y * TILE_SIZE);
 			}
 			x++;
 		}
@@ -119,7 +119,7 @@ int	render_game(t_vars *vars)
 			&vars->base_image->endian);
 	draw_background(vars);
 	draw_wall(vars);
-	draw_token(vars);
+	draw_collectible(vars);
 	draw_exit(vars);
 	draw_player(vars);
 	mlx_clear_window(vars->mlx, vars->win);

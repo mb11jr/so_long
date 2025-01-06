@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 09:57:13 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/04 15:10:10 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/05 11:08:22 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_vars
 	t_obj		*background;
 	t_obj		*wall;
 	t_obj		*player;
-	t_obj		*token;
+	t_obj		*collectible;
 	t_obj		*exit;
 	int			collected;
 	int			total_collectibles;
