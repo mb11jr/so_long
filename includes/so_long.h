@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 14:30:52 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/05 13:42:44 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/09 10:59:57 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,13 @@
 # include <unistd.h>
 
 # define TILE_SIZE 48
-# define SPEED 24
-# define BACKGROUND "./textures/Background/background.xpm"
-# define WALL "./textures/Background/wall.xpm"
+# define SPEED 48
+# define BACKGROUND "./textures/Background/Background01.xpm"
+# define WALL "./textures/Background/Wall01.xpm"
 # define PLAYER "./textures/Player/pirate.xpm"
 # define COLLECTIBLE "./textures/Background/key0.xpm"
 # define EXIT "./textures/Exit/exit00.xpm"
 
-void			read_map(t_vars *vars, char *path);
 t_obj			*add_image(t_vars *vars, char *filename, t_obj *img);
 void			get_position(t_vars *vars);
 void			put_pixel_img(t_vars *vars, int x, int y, int color);
@@ -44,7 +43,12 @@ int				draw_wall(t_vars *vars);
 int				draw_player(t_vars *vars);
 int				draw_collectible(t_vars *vars);
 int				render_game(t_vars *vars);
-void			total_collectibles(t_vars *vars, char *path);
-void	map_parser(t_vars *vars, char *path);
+void			total_collectibles(t_vars *vars);
+void			read_map(t_vars *vars, char *path);
+void            map_error(char *s);
+void            map_parser(t_vars *vars);
+int	            is_rectangular(t_vars *vars);
+int	            ft_linelen(char *s);
+int             count_collectibles(t_vars *vars);
 
 #endif

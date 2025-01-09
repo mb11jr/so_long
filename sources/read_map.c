@@ -6,27 +6,19 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 14:34:15 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/05 13:33:28 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/09 13:02:41 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	map_error(char *s)
-{
-	ft_printf("Error\n");
-	ft_printf("%s\n", s);
-	exit(0);
-}
-
-void	total_collectibles(t_vars *vars, char *path)
+void	total_collectibles(t_vars *vars)
 {
 	int x;
 	int y;
 	int count;
 
 	count = 0;
-	read_map(vars, path);
 	y = 0;
 	while(vars->map[y])
 	{
@@ -40,24 +32,6 @@ void	total_collectibles(t_vars *vars, char *path)
 	y++;	
 	}
 }
-void	map_parser(t_vars *vars, char *path)
-{
-	int i;
-	size_t len;
-
-	read_map(vars, path);
-	len = ft_strlen(vars->map[0]);
-	i = 1;
-	while (vars->map[i])
-	{
-		if (ft_strlen(vars->map[i]) != len)
-		{
-			ft_printf("The map is not rectangular!");
-			exit(0);
-		}
-		i++;
-	}
-}
 
 int	ft_linelen(char *s)
 {
@@ -68,10 +42,10 @@ int	ft_linelen(char *s)
 		i++;
 	return (i);
 }
+
 void	read_map(t_vars *vars, char *path)
 {
     int		fd;
-	// size_t len;
 	char	*line;
 	int		rows;
 
@@ -79,22 +53,20 @@ void	read_map(t_vars *vars, char *path)
 	if (fd < 0)
 		map_error("The map file doesn't exist!");
 	rows = 0;
-	line = get_next_line(fd);
-	while (line)
+	while ((line = get_next_line(fd)))
 	{
 		if (rows == 0)
 			vars->win_width = TILE_SIZE * ft_linelen(line);
-		if (ft_linelen(line) != vars->win_width / TILE_SIZE)
-			map_error("The map is not rectangular!");
 		rows++;
-		line = get_next_line(fd);
 	}
 	vars->win_height = TILE_SIZE * rows;
+	if (!vars->win_height || !vars->win_width)
+		map_error("The map file is empty!");
 	vars->map = malloc((rows + 1) * sizeof(char *));
 	fd = open(path, O_RDONLY);
 	rows = 0;
 	while ((line = get_next_line(fd)) != NULL)
-		vars->map[rows++] = line;
+		vars->map[rows++] = ft_substr(line, 0, ft_linelen(line));
 	vars->map[rows] = NULL;
 	close(fd);
 }

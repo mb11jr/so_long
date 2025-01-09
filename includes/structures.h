@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 09:57:13 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/05 11:08:22 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/09 11:39:29 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,10 @@ typedef struct s_vars
 	t_obj		*exit;
 	int			collected;
 	int			total_collectibles;
+	int			reachable_collectibles;
 	int			moves;
 	short int	exit_unlocked;
+	int			reachable_exit;
 }				t_vars;
 
 #endif
