@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 12:11:32 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/09 13:08:09 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/10 11:18:05 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	map_error(char *s)
 {
 	ft_printf("Error\n");
 	ft_printf("%s\n", s);
-	exit(0);
+	exit(1);
 }
 
 int	is_rectangular(t_vars *vars)
@@ -50,6 +50,7 @@ int	enclosed_in_walls(t_vars *vars)
 	}
 	i = 1;
 	while (vars->map[i] && i != vars->win_height / TILE_SIZE - 1)
+
 	{
 		if (vars->map[i][0] != '1' || vars->map[i][ft_linelen(vars->map[i])
 			- 1] != '1')
@@ -58,7 +59,6 @@ int	enclosed_in_walls(t_vars *vars)
 	}
 	return (1);
 }
-
 int	check_exit_start(t_vars *vars)
 {
 	int	i;
@@ -227,4 +227,8 @@ void	map_parser(t_vars *vars)
 		map_error("The map must have at least one collectible!");
 	if (!check_path(vars))
 		map_error("There is no valid path in the map!\n(The player can't reach the exit after collecting all the collectibles)");
+	if (vars->win_width > 1920)
+		map_error("The map exceeds the maximum window width!");
+	if (vars->win_height > 1080)
+		map_error("The map exceeds the maximum window height!");
 }

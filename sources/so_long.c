@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 09:53:36 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/09 11:56:19 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/10 11:18:05 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	keypress_handler(int keycode, t_vars *vars)
 	if (keycode == XK_Escape)
 	{
 		mlx_destroy_window(vars->mlx, vars->win);
-		exit(0);
+		exit(1);
 	}
 	if (keycode == XK_w || keycode == XK_Up)
 		new_y -= SPEED;
@@ -85,7 +85,7 @@ int	keypress_handler(int keycode, t_vars *vars)
 	{
 		ft_printf("Congratulations! YOU HAVE WON!\n");
 		mlx_destroy_window(vars->mlx, vars->win);
-		exit(0);
+		exit(1);
 	}
 	return (0);
 }
@@ -93,7 +93,7 @@ int	keypress_handler(int keycode, t_vars *vars)
 int	close_handler(t_vars *vars)
 {
 	mlx_destroy_window(vars->mlx, vars->win);
-	exit(0);
+	exit(1);
 	return (0);
 }
 
@@ -116,14 +116,21 @@ void	game_init(t_vars *vars)
 	vars->total_collectibles = count_collectibles(vars);
 }
 
-int	main(void)
+int	main(int ac, char **av)
 {
 	t_vars	vars;
 
+	if (ac <= 1)
+		map_error("No map specified.");
+	if (ac > 2)
+		map_error("Too many arguments!");
+	if (ac == 2 && !check_map_name(av[1]))
+		map_error("Wrong map file extension! Make sure it ends with .ber");
 	// check the map name is it ends in .ber
+	// check if win_width and win_height don't exceed 1080x1920
 	vars.mlx = mlx_init();
 	load_images(&vars);
-	read_map(&vars, "maps/map0.ber");
+	read_map(&vars, av[1]);
 	game_init(&vars);
 	get_position(&vars);
 	map_parser(&vars);

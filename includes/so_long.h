@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 14:30:52 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/09 10:59:57 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/10 11:20:53 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@
 # include <unistd.h>
 
 # define TILE_SIZE 48
-# define SPEED 48
+# define SPEED 24
 # define BACKGROUND "./textures/Background/Background01.xpm"
 # define WALL "./textures/Background/Wall01.xpm"
-# define PLAYER "./textures/Player/pirate.xpm"
+# define PLAYER "./textures/Player/shroom.xpm"
 # define COLLECTIBLE "./textures/Background/key0.xpm"
 # define EXIT "./textures/Exit/exit00.xpm"
 
@@ -50,5 +50,6 @@ void            map_parser(t_vars *vars);
 int	            is_rectangular(t_vars *vars);
 int	            ft_linelen(char *s);
 int             count_collectibles(t_vars *vars);
+int	check_map_name(char *s);
 
 #endif

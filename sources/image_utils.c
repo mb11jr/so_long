@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:36:31 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/04 14:41:00 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/10 11:17:31 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ t_obj	*add_image(t_vars *vars, char *filename, t_obj *img)
 	if (!img)
 		return (NULL);
 	img->img = mlx_xpm_file_to_image(vars->mlx, filename, &img->width, &img->height);
+	if (!img->img)
+	{
+		ft_printf("The file %s doesn't exist!", filename);
+		exit(1);
+	}
 	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel, &img->line_length, &img->endian);
 	return (img);
 }
