@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 10:36:12 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/11 12:34:10 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/11 15:14:18 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void	ft_error(const char *format, ...)
 		}
 		format++;
 	}
+	ft_printf("\n");
 	va_end(args);
 	exit(1);
 }

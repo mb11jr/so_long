@@ -6,140 +6,18 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 12:11:32 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/11 14:34:10 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/11 15:13:56 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-// void	map_error(char *s)
+// void	ft_error(char *s)
 // {
 // 	ft_printf("Error\n");
 // 	ft_printf("%s\n", s);
 // 	exit(1);
 // }
-
-int	is_rectangular(t_vars *vars)
-{
-	int	i;
-	int	len;
-
-	len = ft_linelen(vars->map[0]);
-	i = 1;
-	while (vars->map[i])
-	{
-		if (ft_linelen(vars->map[i]) != len)
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-int	enclosed_in_walls(t_vars *vars)
-{
-	int	i;
-	int	j;
-
-	j = 0;
-	while (vars->map[0][j] && vars->map[vars->win_height / TILE_SIZE - 1][j])
-	{
-		if (vars->map[0][j] != '1' || vars->map[vars->win_height / TILE_SIZE
-			- 1][j] != '1')
-			return (0);
-		j++;
-	}
-	i = 1;
-	while (vars->map[i] && i != vars->win_height / TILE_SIZE - 1)
-
-	{
-		if (vars->map[i][0] != '1' || vars->map[i][ft_linelen(vars->map[i])
-			- 1] != '1')
-			return (0);
-		i++;
-	}
-	return (1);
-}
-int	check_exit_start(t_vars *vars)
-{
-	int	i;
-	int	j;
-	int	count_exit;
-	int	count_player;
-
-	count_exit = 0;
-	count_player = 0;
-	i = -1;
-	while (vars->map[++i])
-	{
-		j = -1;
-		while (vars->map[i][++j])
-		{
-			if (vars->map[i][j] == 'E')
-				count_exit++;
-			if (vars->map[i][j] == 'P')
-				count_player++;
-			if (count_exit > 1 || count_player > 1)
-				return (0);
-		}
-	}
-	if (count_exit == 0 || count_player == 0)
-		return (0);
-	return (1);
-}
-
-int	count_collectibles(t_vars *vars)
-{
-	int	i;
-	int	j;
-	int	count;
-
-	count = 0;
-	i = 0;
-	while (vars->map[i])
-	{
-		j = 0;
-		while (vars->map[i][j])
-		{
-			if (vars->map[i][j] == 'C')
-				count++;
-			j++;
-		}
-		i++;
-	}
-	return (count);
-}
-
-int	valid_map(t_vars *vars)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (vars->map[i])
-	{
-		j = 0;
-		while (vars->map[i][j])
-		{
-			if (vars->map[i][j] != '1' && vars->map[i][j] != 'C'
-				&& vars->map[i][j] != 'E' && vars->map[i][j] != '0'
-				&& vars->map[i][j] != 'P')
-				return (0);
-			j++;
-		}
-		i++;
-	}
-	return (1);
-}
-
-int	check_map_name(char *s)
-{
-	int	i;
-
-	i = ft_strlen(s) - 1;
-	if (s[i] == 'r' && s[i - 1] == 'e' && s[i - 2] == 'b' && s[i - 3] == '.')
-		return (1);
-	return (0);
-}
 void	flood_fill(t_vars *vars, char **map, int x, int y)
 {
 	int	height;
@@ -185,6 +63,7 @@ char	**clone_map(char **original, int height, int width)
 	}
 	return (clone);
 }
+
 void	free_map(char **map, int height)
 {
 	int	i;
@@ -226,7 +105,7 @@ void	map_parser(t_vars *vars)
 	if (count_collectibles(vars) < 1)
 		ft_error("The map must have at least one collectible!");
 	if (!check_path(vars))
-		ft_error("There is no valid path in the map!\n(The player can't reach the exit after collecting all the collectibles)");
+		ft_error("There is no valid path in the map!\nThe player can't reach the exit.");
 	if (vars->win_width > 1920)
 		ft_error("The map exceeds the maximum window width!");
 	if (vars->win_height > 1080)

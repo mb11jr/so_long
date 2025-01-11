@@ -4,7 +4,7 @@ CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3
 HEADERS = $(addprefix includes/, so_long.h structures.h)
 INCLUDES =  -Iincludes -I/usr/local/include
 MLX_FLAGS = -L/usr/local/lib -lmlx_Linux -lXext -lX11 -lm -lz
-SRC = $(addprefix sources/, so_long.c draw.c read_map.c map_parser.c image_utils.c)
+SRC = $(addprefix sources/, so_long.c map_utils.c utils.c draw.c read_map.c map_parser.c map_parser_utils.c image_utils.c)
 OBJ = $(SRC:.c=.o)
 
 all : $(NAME)

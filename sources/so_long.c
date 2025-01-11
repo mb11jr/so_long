@@ -6,22 +6,11 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 09:53:36 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/11 12:40:55 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/11 15:55:12 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-void	update_player_position(t_vars *vars)
-{
-	if (vars->map[vars->player->y / TILE_SIZE][vars->player->x
-		/ TILE_SIZE] == 'C')
-	{
-		++vars->collected;
-		vars->map[vars->player->y / TILE_SIZE][vars->player->x
-			/ TILE_SIZE] = '0';
-	}
-}
 
 int	do_overlap(int ax, int ay, int bx, int by)
 {
@@ -32,11 +21,52 @@ int	do_overlap(int ax, int ay, int bx, int by)
 	return (1);
 }
 
+int	check_wall_collision(t_vars *vars, int x, int y)
+{
+	int	i;
+	int	j;
+
+	j = 0;
+	while (vars->map[j])
+	{
+		i = 0;
+		while (vars->map[j][i])
+		{
+			if ((vars->map[j][i] == '1' || (vars->map[j][i] == 'E'
+						&& vars->collected < vars->total_collectibles))
+				&& do_overlap(x, y, i * TILE_SIZE, j * TILE_SIZE))
+				return (1);
+			i++;
+		}
+		j++;
+	}
+	return (0);
+}
+
+void	game_won(t_vars *vars)
+{
+	if (vars->map[vars->player->y / TILE_SIZE][vars->player->x
+		/ TILE_SIZE] == 'E' && vars->collected == vars->total_collectibles)
+	{
+		ft_printf("Congratulations! YOU HAVE WON!\n");
+		ft_printf("Is that the best you can do?");
+		ft_printf("Look for a shorter path... :D");
+		mlx_destroy_window(vars->mlx, vars->win);
+		exit(1);
+	}
+	if (vars->map[vars->player->y / TILE_SIZE][vars->player->x
+		/ TILE_SIZE] == 'C')
+	{
+		++vars->collected;
+		vars->map[vars->player->y / TILE_SIZE][vars->player->x
+			/ TILE_SIZE] = '0';
+	}
+}
+
 int	keypress_handler(int keycode, t_vars *vars)
 {
-	int		new_x;
-	int		new_y;
-	char	tile;
+	int	new_x;
+	int	new_y;
 
 	new_x = vars->player->x;
 	new_y = vars->player->y;
@@ -54,34 +84,11 @@ int	keypress_handler(int keycode, t_vars *vars)
 		new_y += SPEED;
 	if (keycode == XK_d || keycode == XK_Right)
 		new_x += SPEED;
-	int x, y;
-	y = 0;
-	while (vars->map[y])
-	{
-		x = 0;
-		while (vars->map[y][x])
-		{
-			tile = vars->map[y][x];
-			if ((tile == '1' || (tile == 'E'
-						&& vars->collected < vars->total_collectibles))
-				&& do_overlap(new_x, new_y, x * TILE_SIZE, y * TILE_SIZE))
-			{
-				return (0);
-			}
-			x++;
-		}
-		y++;
-	}
+	if (check_wall_collision(vars, new_x, new_y))
+		return (0);
 	vars->player->x = new_x;
 	vars->player->y = new_y;
-	update_player_position(vars);
-	if (vars->map[vars->player->y / TILE_SIZE][vars->player->x
-		/ TILE_SIZE] == 'E' && vars->collected == vars->total_collectibles)
-	{
-		ft_printf("Congratulations! YOU HAVE WON!\n");
-		mlx_destroy_window(vars->mlx, vars->win);
-		exit(1);
-	}
+	game_won(vars);
 	return (0);
 }
 
@@ -116,11 +123,11 @@ int	main(int ac, char **av)
 	t_vars	vars;
 
 	if (ac <= 1)
-		map_error("No map specified.");
+		ft_error("No map specified.");
 	if (ac > 2)
-		map_error("Too many arguments!");
+		ft_error("Too many arguments!");
 	if (ac == 2 && !check_map_name(av[1]))
-		map_error("Wrong map file extension! Make sure it ends with .ber");
+		ft_error("Wrong map file extension! Make sure it ends with .ber");
 	vars.mlx = mlx_init();
 	load_images(&vars);
 	read_map(&vars, av[1]);

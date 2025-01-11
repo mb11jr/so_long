@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:05:32 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/09 13:07:25 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/11 15:03:12 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,12 +102,24 @@ int	valid_map(t_vars *vars)
 	return (1);
 }
 
-int	check_map_name(char *s)
+int	count_collectibles(t_vars *vars)
 {
 	int	i;
+	int	j;
+	int	count;
 
-	i = ft_strlen(s) - 1;
-	if (s[i] == 'r' && s[i - 1] == 'e' && s[i - 2] == 'b' && s[i - 3] == '.')
-		return (1);
-	return (0);
+	count = 0;
+	i = 0;
+	while (vars->map[i])
+	{
+		j = 0;
+		while (vars->map[i][j])
+		{
+			if (vars->map[i][j] == 'C')
+				count++;
+			j++;
+		}
+		i++;
+	}
+	return (count);
 }
