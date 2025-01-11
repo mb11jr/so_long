@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 14:30:52 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/10 11:20:53 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/11 12:24:33 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,14 @@ void			get_position(t_vars *vars);
 void			put_pixel_img(t_vars *vars, int x, int y, int color);
 unsigned int	get_pixel_img(t_obj *img, int x, int y);
 void			put_img_to_img(t_vars *vars, t_obj *src, int x, int y);
-int				draw_background(t_vars *vars);
-int				draw_wall(t_vars *vars);
-int				draw_player(t_vars *vars);
-int				draw_collectible(t_vars *vars);
 int				render_game(t_vars *vars);
 void			total_collectibles(t_vars *vars);
 void			read_map(t_vars *vars, char *path);
-void            map_error(char *s);
-void            map_parser(t_vars *vars);
-int	            is_rectangular(t_vars *vars);
-int	            ft_linelen(char *s);
-int             count_collectibles(t_vars *vars);
-int	check_map_name(char *s);
+void			map_error(char *s);
+void			map_parser(t_vars *vars);
+int				is_rectangular(t_vars *vars);
+int				ft_linelen(char *s);
+int				count_collectibles(t_vars *vars);
+int				check_map_name(char *s);
 
 #endif

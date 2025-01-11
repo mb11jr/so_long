@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 15:37:45 by mbentale          #+#    #+#             */
-/*   Updated: 2024/11/13 12:02:42 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/11 12:31:27 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 
 int		ft_printf(const char *format, ...);
+void	ft_error(const char *format, ...);
 void	ft_printstr(char *str, int *count);
 void	ft_printu(unsigned int value, int *count);
 void	ft_printid(int id, int *count);

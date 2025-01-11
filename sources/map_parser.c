@@ -6,18 +6,18 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 12:11:32 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/10 11:18:05 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/11 14:34:10 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	map_error(char *s)
-{
-	ft_printf("Error\n");
-	ft_printf("%s\n", s);
-	exit(1);
-}
+// void	map_error(char *s)
+// {
+// 	ft_printf("Error\n");
+// 	ft_printf("%s\n", s);
+// 	exit(1);
+// }
 
 int	is_rectangular(t_vars *vars)
 {
@@ -216,19 +216,19 @@ int	check_path(t_vars *vars)
 void	map_parser(t_vars *vars)
 {
 	if (!valid_map(vars))
-		map_error("The map is invalid! There are unrecognizable characters.");
+		ft_error("The map is invalid! There are unrecognizable characters.");
 	if (!is_rectangular(vars))
-		map_error("The map is not rectangular!");
+		ft_error("The map is not rectangular!");
 	if (!enclosed_in_walls(vars))
-		map_error("The map is not enclosed in walls!");
+		ft_error("The map is not enclosed in walls!");
 	if (!check_exit_start(vars))
-		map_error("The map doesn't contain exactly one player and one exit!");
+		ft_error("The map doesn't contain exactly one player and one exit!");
 	if (count_collectibles(vars) < 1)
-		map_error("The map must have at least one collectible!");
+		ft_error("The map must have at least one collectible!");
 	if (!check_path(vars))
-		map_error("There is no valid path in the map!\n(The player can't reach the exit after collecting all the collectibles)");
+		ft_error("There is no valid path in the map!\n(The player can't reach the exit after collecting all the collectibles)");
 	if (vars->win_width > 1920)
-		map_error("The map exceeds the maximum window width!");
+		ft_error("The map exceeds the maximum window width!");
 	if (vars->win_height > 1080)
-		map_error("The map exceeds the maximum window height!");
+		ft_error("The map exceeds the maximum window height!");
 }

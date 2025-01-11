@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 09:53:36 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/10 11:18:05 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/11 12:40:55 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,12 @@
 
 void	update_player_position(t_vars *vars)
 {
-	// int count;
-	// count = 0;
 	if (vars->map[vars->player->y / TILE_SIZE][vars->player->x
 		/ TILE_SIZE] == 'C')
 	{
 		++vars->collected;
-		// ft_printf("Collected items: %d\n", vars->collected);
 		vars->map[vars->player->y / TILE_SIZE][vars->player->x
 			/ TILE_SIZE] = '0';
-		// if (vars->map[vars->player->y / TILE_SIZE][vars->player->x
-			// / TILE_SIZE] == 'E')
 	}
 }
 
@@ -126,8 +121,6 @@ int	main(int ac, char **av)
 		map_error("Too many arguments!");
 	if (ac == 2 && !check_map_name(av[1]))
 		map_error("Wrong map file extension! Make sure it ends with .ber");
-	// check the map name is it ends in .ber
-	// check if win_width and win_height don't exceed 1080x1920
 	vars.mlx = mlx_init();
 	load_images(&vars);
 	read_map(&vars, av[1]);

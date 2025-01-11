@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 14:34:15 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/09 13:02:41 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/11 11:34:56 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 void	total_collectibles(t_vars *vars)
 {
-	int x;
-	int y;
-	int count;
+	int	x;
+	int	y;
+	int	count;
 
 	count = 0;
 	y = 0;
-	while(vars->map[y])
+	while (vars->map[y])
 	{
 		x = 0;
-		while(vars->map[y][x])
+		while (vars->map[y][x])
 		{
 			if (vars->map[y][x] == 'C')
 				vars->total_collectibles = ++count;
-			x++;	
+			x++;
 		}
-	y++;	
+		y++;
 	}
 }
 
@@ -43,30 +43,45 @@ int	ft_linelen(char *s)
 	return (i);
 }
 
+int	map_height(t_vars *vars, int fd)
+{
+	char	*line;
+	int		rows;
+
+	rows = 0;
+	line = get_next_line(fd);
+	while (line)
+	{
+		if (rows == 0)
+			vars->win_width = TILE_SIZE * ft_linelen(line);
+		rows++;
+		line = get_next_line(fd);
+	}
+	vars->win_height = TILE_SIZE * rows;
+	if (!vars->win_height || !vars->win_width)
+		map_error("The map file is empty!");
+	return (rows);
+}
+
 void	read_map(t_vars *vars, char *path)
 {
-    int		fd;
+	int		fd;
 	char	*line;
 	int		rows;
 
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 		map_error("The map file doesn't exist!");
-	rows = 0;
-	while ((line = get_next_line(fd)))
-	{
-		if (rows == 0)
-			vars->win_width = TILE_SIZE * ft_linelen(line);
-		rows++;
-	}
-	vars->win_height = TILE_SIZE * rows;
-	if (!vars->win_height || !vars->win_width)
-		map_error("The map file is empty!");
+	rows = map_height(vars, fd);
 	vars->map = malloc((rows + 1) * sizeof(char *));
 	fd = open(path, O_RDONLY);
 	rows = 0;
-	while ((line = get_next_line(fd)) != NULL)
+	line = get_next_line(fd);
+	while (line)
+	{
 		vars->map[rows++] = ft_substr(line, 0, ft_linelen(line));
+		line = get_next_line(fd);
+	}
 	vars->map[rows] = NULL;
 	close(fd);
 }

@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 09:57:13 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/09 11:39:29 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/11 11:15:48 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ typedef struct s_obj
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
-	// struct s_obj	*next;
 }				t_obj;
 
 typedef struct s_vars
