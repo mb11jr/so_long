@@ -6,18 +6,12 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 12:11:32 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/11 15:13:56 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/13 21:12:34 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-// void	ft_error(char *s)
-// {
-// 	ft_printf("Error\n");
-// 	ft_printf("%s\n", s);
-// 	exit(1);
-// }
 void	flood_fill(t_vars *vars, char **map, int x, int y)
 {
 	int	height;
@@ -105,7 +99,10 @@ void	map_parser(t_vars *vars)
 	if (count_collectibles(vars) < 1)
 		ft_error("The map must have at least one collectible!");
 	if (!check_path(vars))
-		ft_error("There is no valid path in the map!\nThe player can't reach the exit.");
+	{
+		ft_error("There is no valid path in the map!\n");
+		ft_error("The player can't reach the exit.");
+	}
 	if (vars->win_width > 1920)
 		ft_error("The map exceeds the maximum window width!");
 	if (vars->win_height > 1080)

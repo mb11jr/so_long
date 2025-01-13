@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 14:30:52 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/11 14:58:43 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/13 21:15:19 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,16 @@ int				render_game(t_vars *vars);
 void			read_map(t_vars *vars, char *path);
 void			map_parser(t_vars *vars);
 int				is_rectangular(t_vars *vars);
-int	enclosed_in_walls(t_vars *vars);
-int	check_exit_start(t_vars *vars);
-int	valid_map(t_vars *vars);
+int				enclosed_in_walls(t_vars *vars);
+int				check_exit_start(t_vars *vars);
+int				valid_map(t_vars *vars);
 int				ft_linelen(char *s);
 void			total_collectibles(t_vars *vars);
 int				count_collectibles(t_vars *vars);
 int				check_map_name(char *s);
+void			game_won(t_vars *vars);
+int				check_wall_collision(t_vars *vars, int x, int y);
+void			game_init(t_vars *vars);
+void			load_images(t_vars *vars);
 
 #endif

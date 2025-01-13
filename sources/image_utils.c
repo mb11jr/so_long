@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:36:31 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/11 15:02:07 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/13 21:10:46 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	put_pixel_img(t_vars *vars, int x, int y, int color)
 unsigned int	get_pixel_img(t_obj *img, int x, int y)
 {
 	return (*(unsigned int *)(img->addr + y * img->line_length + x
-			* img->bits_per_pixel / 8));
+		* img->bits_per_pixel / 8));
 }
 
 void	put_img_to_img(t_vars *vars, t_obj *src, int x, int y)
