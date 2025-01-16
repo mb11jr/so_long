@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 14:30:52 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/13 21:15:19 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/16 08:41:57 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define BACKGROUND "./textures/Background/Background01.xpm"
 # define WALL "./textures/Background/Wall01.xpm"
 # define PLAYER "./textures/Player/shroom.xpm"
-# define COLLECTIBLE "./textures/Background/key0.xpm"
+# define COLLECTIBLE "./textures/Collectibles/ball.xpm"
 # define EXIT "./textures/Exit/exit00.xpm"
 
 t_obj			*add_image(t_vars *vars, char *filename, t_obj *img);

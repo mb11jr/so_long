@@ -6,11 +6,20 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 09:53:36 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/13 21:06:26 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/16 09:05:21 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	count_moves(int keycode, t_vars *vars, int x, int y)
+{
+	if (!check_wall_collision(vars, x, y) && (keycode == XK_w
+			|| keycode == XK_Up || keycode == XK_a || keycode == XK_Left
+			|| keycode == XK_s || keycode == XK_Down || keycode == XK_d
+			|| keycode == XK_Right))
+		ft_printf("Total moves: %d\n", ++vars->moves);
+}
 
 int	keypress_handler(int keycode, t_vars *vars)
 {
@@ -19,7 +28,6 @@ int	keypress_handler(int keycode, t_vars *vars)
 
 	new_x = vars->player->x;
 	new_y = vars->player->y;
-	ft_printf("Total moves: %d\n", ++vars->moves);
 	if (keycode == XK_Escape)
 	{
 		mlx_destroy_window(vars->mlx, vars->win);
@@ -35,6 +43,7 @@ int	keypress_handler(int keycode, t_vars *vars)
 		new_x += SPEED;
 	if (check_wall_collision(vars, new_x, new_y))
 		return (0);
+	count_moves(keycode, vars, new_x, new_y);
 	vars->player->x = new_x;
 	vars->player->y = new_y;
 	game_won(vars);
