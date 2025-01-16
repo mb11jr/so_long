@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:19:12 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/16 09:06:15 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/16 10:29:20 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	load_images(t_vars *vars)
 
 void	game_init(t_vars *vars)
 {
+	get_player_position(vars);
 	vars->collected = 0;
 	vars->reachable_exit = 0;
 	vars->reachable_collectibles = 0;
@@ -61,6 +62,27 @@ int	check_wall_collision(t_vars *vars, int x, int y)
 	}
 	return (0);
 }
+
+// int	check_enemy_collision(t_vars *vars, int x, int y)
+// {
+// 	int	i;
+// 	int	j;
+
+// 	j = 0;
+// 	while (vars->map[j])
+// 	{
+// 		i = 0;
+// 		while (vars->map[j][i])
+// 		{
+// 			if (vars->map[j][i] == 'N'
+// 				&& do_overlap(x, y, i * TILE_SIZE, j * TILE_SIZE))
+// 				return (1);
+// 			i++;
+// 		}
+// 		j++;
+// 	}
+// 	return (0);
+// }
 
 void	game_won(t_vars *vars)
 {

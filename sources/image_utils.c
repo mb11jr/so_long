@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:36:31 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/16 09:05:56 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/16 09:28:46 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_obj	*add_image(t_vars *vars, char *filename, t_obj *img)
 	return (img);
 }
 
-void	get_position(t_vars *vars)
+void	get_player_position(t_vars *vars)
 {
 	int	x;
 	int	y;

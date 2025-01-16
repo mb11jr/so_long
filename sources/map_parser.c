@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 12:11:32 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/13 21:47:26 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/16 15:39:03 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,12 @@ void	flood_fill(t_vars *vars, char **map, int x, int y)
 		return ;
 	if (map[y][x] == 'C')
 		vars->reachable_collectibles++;
-	else if (map[y][x] == 'E')
+	if (map[y][x] == 'E')
+	{
 		vars->reachable_exit++;
+		map[y][x] = '1';
+		return ;
+	}
 	map[y][x] = 'V';
 	flood_fill(vars, map, x + 1, y);
 	flood_fill(vars, map, x - 1, y);

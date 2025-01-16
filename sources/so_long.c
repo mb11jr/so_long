@@ -6,13 +6,13 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 09:53:36 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/16 09:05:21 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/16 10:29:04 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	count_moves(int keycode, t_vars *vars, int x, int y)
+void	display_count(int keycode, t_vars *vars, int x, int y)
 {
 	if (!check_wall_collision(vars, x, y) && (keycode == XK_w
 			|| keycode == XK_Up || keycode == XK_a || keycode == XK_Left
@@ -21,6 +21,14 @@ void	count_moves(int keycode, t_vars *vars, int x, int y)
 		ft_printf("Total moves: %d\n", ++vars->moves);
 }
 
+// void	destroy_win(int keycode, t_vars *vars, int x, int y)
+// {
+// 	if (keycode == XK_Escape || check_enemy_collision(vars, x, y))
+// 	{
+// 		mlx_destroy_window(vars->mlx, vars->win);
+// 		exit(1);
+// 	}
+// }
 int	keypress_handler(int keycode, t_vars *vars)
 {
 	int	new_x;
@@ -33,6 +41,7 @@ int	keypress_handler(int keycode, t_vars *vars)
 		mlx_destroy_window(vars->mlx, vars->win);
 		exit(1);
 	}
+	// destroy_win(keycode, vars, vars->player->x, vars->player->y);
 	if (keycode == XK_w || keycode == XK_Up)
 		new_y -= SPEED;
 	if (keycode == XK_a || keycode == XK_Left)
@@ -43,7 +52,7 @@ int	keypress_handler(int keycode, t_vars *vars)
 		new_x += SPEED;
 	if (check_wall_collision(vars, new_x, new_y))
 		return (0);
-	count_moves(keycode, vars, new_x, new_y);
+	display_count(keycode, vars, new_x, new_y);
 	vars->player->x = new_x;
 	vars->player->y = new_y;
 	game_won(vars);
@@ -71,11 +80,9 @@ int	main(int ac, char **av)
 	load_images(&vars);
 	read_map(&vars, av[1]);
 	game_init(&vars);
-	get_position(&vars);
 	map_parser(&vars);
 	vars.win = mlx_new_window(vars.mlx, vars.win_width, vars.win_height,
 			"Welcome to my 2D game");
-	vars.map[vars.player->y / TILE_SIZE][vars.player->x / TILE_SIZE] = '0';
 	mlx_hook(vars.win, KeyPress, KeyPressMask, keypress_handler, &vars);
 	mlx_hook(vars.win, DestroyNotify, NoEventMask, close_handler, &vars);
 	mlx_loop_hook(vars.mlx, render_game, &vars);

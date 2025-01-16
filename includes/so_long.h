@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 14:30:52 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/16 08:41:57 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/16 10:28:09 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@
 # define TILE_SIZE 48
 # define SPEED 24
 # define BACKGROUND "./textures/Background/Background01.xpm"
-# define WALL "./textures/Background/Wall01.xpm"
+# define WALL "./textures/Background/Wall.xpm"
 # define PLAYER "./textures/Player/shroom.xpm"
-# define COLLECTIBLE "./textures/Collectibles/ball.xpm"
+# define COLLECTIBLE "./textures/Collectibles/coin.xpm"
 # define EXIT "./textures/Exit/exit00.xpm"
 
 t_obj			*add_image(t_vars *vars, char *filename, t_obj *img);
-void			get_position(t_vars *vars);
+void			get_player_position(t_vars *vars);
 void			put_pixel_img(t_vars *vars, int x, int y, int color);
 unsigned int	get_pixel_img(t_obj *img, int x, int y);
 void			put_img_to_img(t_vars *vars, t_obj *src, int x, int y);
@@ -53,5 +53,6 @@ void			game_won(t_vars *vars);
 int				check_wall_collision(t_vars *vars, int x, int y);
 void			game_init(t_vars *vars);
 void			load_images(t_vars *vars);
-
+// int	            check_enemy_collision(t_vars *vars, int x, int y);
+void	free_tiles(t_vars *vars);
 #endif
