@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   image_utils.c                                      :+:      :+:    :+:   */
+/*   image_utils_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:36:31 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/19 16:00:13 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/19 16:08:40 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_obj	*add_image(t_vars *vars, char *filename, t_obj *img)
 			&img->height);
 	if (!img->img)
 	{
-		ft_printf("The file [%s] doesn't exist!", filename);
+		ft_printf("The file %s doesn't exist!", filename);
 		free_images(vars);
 	}
 	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:19:12 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/19 16:03:06 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/19 22:11:41 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	game_init(t_vars *vars)
 	vars->reachable_exit = 0;
 	vars->reachable_collectibles = 0;
 	vars->moves = 0;
+	vars->count = "Total moves: 0";
 	vars->total_collectibles = count_collectibles(vars);
 }
 
@@ -72,6 +73,7 @@ void	game_won(t_vars *vars)
 		ft_printf("Is that the best you can do?\n");
 		ft_printf("Find a shorter path... :D");
 		free_images(vars);
+		free(vars->count);
 	}
 	if (vars->map[vars->player->y / TILE_SIZE][vars->player->x
 		/ TILE_SIZE] == 'C')

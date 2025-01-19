@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 10:36:12 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/11 15:14:18 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/16 16:04:57 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,33 +61,4 @@ int	ft_printf(const char *format, ...)
 	}
 	va_end(args);
 	return (total_count);
-}
-
-void	ft_error(const char *format, ...)
-{
-	va_list	args;
-	int		total_count;
-
-	total_count = 0;
-	va_start(args, format);
-	if (write(1, 0, 0))
-		exit(2);
-	ft_printf("Error\n");
-	while (*format)
-	{
-		if (*format != '%')
-		{
-			ft_putchar_fd(*format, 1);
-			total_count++;
-		}
-		else
-		{
-			format++;
-			ft_format_check(*format, args, &total_count);
-		}
-		format++;
-	}
-	ft_printf("\n");
-	va_end(args);
-	exit(1);
 }

@@ -8,20 +8,20 @@ OBJS = $(SRCS:.c=.o)
 all : $(NAME)
 
 %.o : %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME) : $(OBJS)
-	make -C ../libft
-	cp ../libft/libft.a $(NAME)
-	ar rcs $(NAME) $(OBJS)
+	@make -C ../libft
+	@cp ../libft/libft.a $(NAME)
+	@ar rcs $(NAME) $(OBJS)
 
 clean :
-	$(MAKE) clean -C ../libft
-	$(RM) $(OBJS)
+	@$(MAKE) clean -C ../libft
+	@$(RM) $(OBJS)
 
 fclean : clean
-	$(MAKE) fclean -C ../libft
-	$(RM) $(NAME)
+	@$(MAKE) fclean -C ../libft
+	@$(RM) $(NAME)
 
 re : fclean all
 

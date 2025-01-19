@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_parser.c                                       :+:      :+:    :+:   */
+/*   map_parser_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 12:11:32 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/19 16:02:31 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/19 16:09:40 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ int	check_path(t_vars *vars)
 
 	map = clone_map(vars->map, vars->win_height / TILE_SIZE, vars->win_width
 			/ TILE_SIZE);
+	if (!map)
+		free_images(vars);
 	flood_fill(vars, map, vars->player->x / TILE_SIZE, vars->player->y
 		/ TILE_SIZE);
 	free_map(map, vars->win_height / TILE_SIZE);

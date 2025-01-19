@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 14:30:52 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/16 10:28:09 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/19 16:03:50 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <fcntl.h>
-# include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -30,7 +29,7 @@
 # define BACKGROUND "./textures/Background/Background01.xpm"
 # define WALL "./textures/Background/Wall.xpm"
 # define PLAYER "./textures/Player/shroom.xpm"
-# define COLLECTIBLE "./textures/Collectibles/coin.xpm"
+# define COLLECTIBLE "./textures/Collectibles/ball.xpm"
 # define EXIT "./textures/Exit/exit00.xpm"
 
 t_obj			*add_image(t_vars *vars, char *filename, t_obj *img);
@@ -53,6 +52,7 @@ void			game_won(t_vars *vars);
 int				check_wall_collision(t_vars *vars, int x, int y);
 void			game_init(t_vars *vars);
 void			load_images(t_vars *vars);
-// int	            check_enemy_collision(t_vars *vars, int x, int y);
-void	free_tiles(t_vars *vars);
+void			error_msg(char *s);
+void			free_map(char **map, int height);
+void			free_images(t_vars *vars);
 #endif
