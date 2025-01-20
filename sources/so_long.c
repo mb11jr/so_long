@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 09:53:36 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/19 16:01:58 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/20 12:40:59 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	display_count(int keycode, t_vars *vars, int x, int y)
 			|| keycode == XK_Up || keycode == XK_a || keycode == XK_Left
 			|| keycode == XK_s || keycode == XK_Down || keycode == XK_d
 			|| keycode == XK_Right))
-		ft_printf("Total moves: %d\n", ++vars->moves);
+		ft_printf("\r\033[KTotal moves: %d", ++vars->moves);
 }
 
 int	keypress_handler(int keycode, t_vars *vars)
