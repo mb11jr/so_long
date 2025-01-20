@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 09:53:36 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/19 22:35:45 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/20 15:11:13 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,13 @@
 
 void	display_count(int keycode, t_vars *vars, int x, int y)
 {
-	char *num;
+	// char *num;
 
 	if (!check_wall_collision(vars, x, y) && (keycode == XK_w
 			|| keycode == XK_Up || keycode == XK_a || keycode == XK_Left
 			|| keycode == XK_s || keycode == XK_Down || keycode == XK_d
 			|| keycode == XK_Right))
-	{
 		++vars->moves;
-		num = ft_itoa(vars->moves);
-		vars->count = ft_strjoin("Total moves: ", num);
-		free(num);
-		free(vars->count);
-	}
 }
 
 int	keypress_handler(int keycode, t_vars *vars)

@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 17:44:20 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/19 22:32:34 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/20 15:11:36 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ int	draw(t_vars *vars)
 
 int	render_game(t_vars *vars)
 {
+	char *count;
+	char *num;
+
 	if (vars->base_image)
 		mlx_destroy_image(vars->mlx, vars->base_image->img);
 	free(vars->base_image);
@@ -54,6 +57,10 @@ int	render_game(t_vars *vars)
 	draw(vars);
 	mlx_clear_window(vars->mlx, vars->win);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->base_image->img, 0, 0);
-	mlx_string_put(vars->mlx, vars->win, 10, 10, 0xFFFFFF, vars->count);
+	num = ft_itoa(vars->moves);
+	count = ft_strjoin("Total moves: ", num);
+	free(num);
+	mlx_string_put(vars->mlx, vars->win, 10, 10, 0xFFFFFF, count);
+	free(count);
 	return (0);
 }
