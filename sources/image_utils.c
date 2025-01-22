@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:36:31 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/19 16:00:13 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/22 22:00:33 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ t_obj	*add_image(t_vars *vars, char *filename, t_obj *img)
 	if (!img->img)
 	{
 		ft_printf("The file [%s] doesn't exist!", filename);
-		free_images(vars);
+		ft_free(vars, 2);
 	}
 	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,
 			&img->line_length, &img->endian);
 	if (!img->addr)
 	{
 		ft_printf("The image address cannot be found");
-		free_images(vars);
+		ft_free(vars, 2);
 	}
 	return (img);
 }
@@ -60,7 +60,7 @@ void	put_pixel_img(t_vars *vars, int x, int y, int color)
 
 	if (color == (int)0xFF000000)
 		return ;
-	if (x >= 0 && x < vars->win_width && y >= 0 && y < vars->win_height)
+	if (x >= 0 && x < vars->win_width * TILE_SCALE && y >= 0 && y < vars->win_height* TILE_SCALE)
 	{
 		pxl = vars->base_image->addr + (y * vars->base_image->line_length + x
 				* vars->base_image->bits_per_pixel / 8);
@@ -71,13 +71,15 @@ void	put_pixel_img(t_vars *vars, int x, int y, int color)
 unsigned int	get_pixel_img(t_obj *img, int x, int y)
 {
 	return (*(unsigned int *)(img->addr + y * img->line_length + x
-		* img->bits_per_pixel / 8));
+			* img->bits_per_pixel / 8));
 }
 
 void	put_img_to_img(t_vars *vars, t_obj *src, int x, int y)
 {
 	int	i;
 	int	j;
+	int	k;
+	int	l;
 
 	i = 0;
 	while (i < src->width)
@@ -85,7 +87,17 @@ void	put_img_to_img(t_vars *vars, t_obj *src, int x, int y)
 		j = 0;
 		while (j < src->height)
 		{
-			put_pixel_img(vars, x + i, y + j, get_pixel_img(src, i, j));
+			k = 0;
+			while (k < TILE_SCALE)
+			{
+				l = 0;
+				while (l < TILE_SCALE)
+				{
+					put_pixel_img(vars, (i + x) * TILE_SCALE + l , (j + y) * TILE_SCALE + k, get_pixel_img(src, i, j));
+					l++;
+				}
+				k++;
+			}
 			j++;
 		}
 		i++;

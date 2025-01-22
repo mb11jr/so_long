@@ -71,7 +71,7 @@ void	put_pixel_img(t_vars *vars, int x, int y, int color)
 unsigned int	get_pixel_img(t_obj *img, int x, int y)
 {
 	return (*(unsigned int *)(img->addr + y * img->line_length + x
-		* img->bits_per_pixel / 8));
+			* img->bits_per_pixel / 8));
 }
 
 void	put_img_to_img(t_vars *vars, t_obj *src, int x, int y)

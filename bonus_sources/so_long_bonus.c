@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 09:53:36 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/20 15:11:13 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/22 16:20:46 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	display_count(int keycode, t_vars *vars, int x, int y)
 {
-	// char *num;
-
 	if (!check_wall_collision(vars, x, y) && (keycode == XK_w
 			|| keycode == XK_Up || keycode == XK_a || keycode == XK_Left
 			|| keycode == XK_s || keycode == XK_Down || keycode == XK_d
@@ -64,7 +62,7 @@ int	main(int ac, char **av)
 	if (ac > 2)
 		error_msg("Too many arguments!");
 	if (ac == 2 && !check_map_name(av[1]))
-		error_msg("Wrong map file extension! Make sure it ends with .ber");
+		error_msg("Wrong file extension! Make sure it ends with .ber");
 	vars.mlx = mlx_init();
 	load_images(&vars);
 	read_map(&vars, av[1]);

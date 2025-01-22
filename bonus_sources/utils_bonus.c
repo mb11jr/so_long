@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:19:12 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/20 15:12:24 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/22 15:34:42 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,16 @@ int	check_wall_collision(t_vars *vars, int x, int y)
 		while (vars->map[j][i])
 		{
 			if ((vars->map[j][i] == '1' || (vars->map[j][i] == 'E'
-				&& vars->collected < vars->total_collectibles))
+						&& vars->collected < vars->total_collectibles))
 				&& do_overlap(x, y, i * TILE_SIZE, j * TILE_SIZE))
 				return (1);
+			if (vars->map[vars->player->y / TILE_SIZE][vars->player->x
+				/ TILE_SIZE] == 'C')
+			{
+				++vars->collected;
+				vars->map[vars->player->y / TILE_SIZE][vars->player->x
+					/ TILE_SIZE] = '0';
+			}
 			i++;
 		}
 		j++;

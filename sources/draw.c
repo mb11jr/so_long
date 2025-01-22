@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 17:44:20 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/19 21:54:12 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/22 21:42:20 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int	render_game(t_vars *vars)
 		mlx_destroy_image(vars->mlx, vars->base_image->img);
 	free(vars->base_image);
 	vars->base_image = malloc(sizeof(t_obj));
-	vars->base_image->img = mlx_new_image(vars->mlx, vars->win_width,
-			vars->win_height);
+	vars->base_image->img = mlx_new_image(vars->mlx, vars->win_width * TILE_SCALE,
+			vars->win_height * TILE_SCALE);
 	vars->base_image->addr = mlx_get_data_addr(vars->base_image->img,
 			&vars->base_image->bits_per_pixel, &vars->base_image->line_length,
 			&vars->base_image->endian);

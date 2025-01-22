@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 09:53:36 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/20 12:40:59 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/22 21:59:34 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	keypress_handler(int keycode, t_vars *vars)
 	new_x = vars->player->x;
 	new_y = vars->player->y;
 	if (keycode == XK_Escape)
-		free_images(vars);
+		ft_free(vars, 0);
 	if (keycode == XK_w || keycode == XK_Up)
 		new_y -= SPEED;
 	if (keycode == XK_a || keycode == XK_Left)
@@ -49,7 +49,7 @@ int	keypress_handler(int keycode, t_vars *vars)
 
 int	close_handler(t_vars *vars)
 {
-	free_images(vars);
+	ft_free(vars, 0);
 	return (0);
 }
 
@@ -62,13 +62,13 @@ int	main(int ac, char **av)
 	if (ac > 2)
 		error_msg("Too many arguments!");
 	if (ac == 2 && !check_map_name(av[1]))
-		error_msg("Wrong map file extension! Make sure it ends with .ber");
+		error_msg("Wrong file extension! Make sure it ends with .ber");
 	vars.mlx = mlx_init();
 	load_images(&vars);
 	read_map(&vars, av[1]);
 	game_init(&vars);
 	map_parser(&vars);
-	vars.win = mlx_new_window(vars.mlx, vars.win_width, vars.win_height,
+	vars.win = mlx_new_window(vars.mlx, vars.win_width * TILE_SCALE, vars.win_height * TILE_SCALE,
 			"Welcome to my 2D game");
 	mlx_hook(vars.win, KeyPress, KeyPressMask, keypress_handler, &vars);
 	mlx_hook(vars.win, DestroyNotify, NoEventMask, close_handler, &vars);

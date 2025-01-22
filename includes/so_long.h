@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 14:30:52 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/19 16:03:50 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/22 22:01:18 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@
 # include <unistd.h>
 
 # define TILE_SIZE 48
-# define SPEED 24
+# define SPEED 12
+# define TILE_SCALE 2
 # define BACKGROUND "./textures/Background/Background01.xpm"
 # define WALL "./textures/Background/Wall.xpm"
 # define PLAYER "./textures/Player/shroom.xpm"
@@ -54,5 +55,6 @@ void			game_init(t_vars *vars);
 void			load_images(t_vars *vars);
 void			error_msg(char *s);
 void			free_map(char **map, int height);
-void			free_images(t_vars *vars);
+void	        ft_destroy_image(t_vars *vars, t_obj *obj);
+void	        ft_free(t_vars *vars, int status);
 #endif

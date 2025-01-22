@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:19:12 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/20 12:45:28 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/22 21:59:14 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,24 @@ int	check_wall_collision(t_vars *vars, int x, int y)
 	int	i;
 	int	j;
 
-	j = 0;
-	while (vars->map[j])
+	j = -1;
+	while (vars->map[++j])
 	{
-		i = 0;
-		while (vars->map[j][i])
+		i = -1;
+		while (vars->map[j][++i])
 		{
-			if ((vars->map[j][i] == '1' || (vars->map[j][i] == 'E'
-				&& vars->collected < vars->total_collectibles))
-				&& do_overlap(x, y, i * TILE_SIZE, j * TILE_SIZE))
+			if (!do_overlap(x, y, i * TILE_SIZE, j * TILE_SIZE))
+				continue ;
+			if (vars->map[j][i] == '1' || (vars->map[j][i] == 'E'
+						&& vars->collected < vars->total_collectibles))
 				return (1);
-			i++;
+			if (vars->map[j][i] == 'C')
+			{
+				++vars->collected;
+				vars->map[j][i] = '0';
+				return (0);
+			}
 		}
-		j++;
 	}
 	return (0);
 }
@@ -71,13 +76,6 @@ void	game_won(t_vars *vars)
 		ft_printf("\nCongratulations! YOU HAVE WON!\n");
 		ft_printf("Is that the best you can do?\n");
 		ft_printf("Find a shorter path... :D");
-		free_images(vars);
-	}
-	if (vars->map[vars->player->y / TILE_SIZE][vars->player->x
-		/ TILE_SIZE] == 'C')
-	{
-		++vars->collected;
-		vars->map[vars->player->y / TILE_SIZE][vars->player->x
-			/ TILE_SIZE] = '0';
+		ft_free(vars, 0);
 	}
 }

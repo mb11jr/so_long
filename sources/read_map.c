@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 14:34:15 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/19 16:10:46 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/22 15:13:54 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	error_msg(char *s)
 {
-	ft_printf("Error\n");
+	ft_printf("Error!\n");
 	ft_printf("%s\n", s);
 	exit(1);
 }
