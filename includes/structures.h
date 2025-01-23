@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 09:57:13 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/22 14:54:22 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/23 17:28:23 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ typedef struct s_vars
 	t_obj	*player;
 	t_obj	*collectible;
 	t_obj	*exit;
+	t_obj	*open_door;
+	t_obj	*text;
+	t_obj	*count[10];
 	int		collected;
 	int		total_collectibles;
 	int		reachable_collectibles;

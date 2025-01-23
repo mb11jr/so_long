@@ -1,7 +1,7 @@
 NAME = so_long
 CC = cc
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3
+CFLAGS = -Wall -Wextra -Werror # -fsanitize=address -g3
 HEADERS = $(addprefix includes/, so_long.h structures.h)
 INCLUDES =  -Iincludes -I/usr/local/include
 MLX_FLAGS = -L/usr/local/lib -lmlx_Linux -lXext -lX11 -lm -lz

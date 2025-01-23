@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 17:44:20 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/22 21:42:20 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/23 17:29:13 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ int	draw(t_vars *vars)
 	int	x;
 	int	y;
 
-	y = 0;
-	while (vars->map[y])
+	y = -1;
+	while (vars->map[++y])
 	{
-		x = 0;
-		while (vars->map[y][x])
+		x = -1;
+		while (vars->map[y][++x])
 		{
 			put_img_to_img(vars, vars->background, x * TILE_SIZE, y
 				* TILE_SIZE);
@@ -31,10 +31,13 @@ int	draw(t_vars *vars)
 				put_img_to_img(vars, vars->collectible, x * TILE_SIZE, y
 					* TILE_SIZE);
 			if (vars->map[y][x] == 'E')
-				put_img_to_img(vars, vars->exit, x * TILE_SIZE, y * TILE_SIZE);
-			x++;
+			{
+				if (vars->collected == vars->total_collectibles)
+					put_img_to_img(vars, vars->open_door, x * TILE_SIZE, y * TILE_SIZE);
+				else
+					put_img_to_img(vars, vars->exit, x * TILE_SIZE, y * TILE_SIZE);
+			}
 		}
-		y++;
 	}
 	put_img_to_img(vars, vars->player, vars->player->x, vars->player->y);
 	return (0);

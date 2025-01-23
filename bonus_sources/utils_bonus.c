@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:19:12 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/22 15:34:42 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/23 16:28:13 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 void	load_images(t_vars *vars)
 {
 	vars->base_image = NULL;
-	vars->background = add_image(vars, BACKGROUND, vars->background);
-	vars->wall = add_image(vars, WALL, vars->wall);
-	vars->player = add_image(vars, PLAYER, vars->player);
-	vars->collectible = add_image(vars, COLLECTIBLE, vars->collectible);
-	vars->exit = add_image(vars, EXIT, vars->exit);
+	vars->background = add_image(vars, BACKGROUND);
+	vars->wall = add_image(vars, WALL);
+	vars->player = add_image(vars, PLAYER);
+	vars->collectible = add_image(vars, COLLECTIBLE);
+	vars->exit = add_image(vars, EXIT);
+	vars->text = add_image(vars, TEXT);
 }
 
 void	game_init(t_vars *vars)
@@ -46,26 +47,24 @@ int	check_wall_collision(t_vars *vars, int x, int y)
 	int	i;
 	int	j;
 
-	j = 0;
-	while (vars->map[j])
+	j = -1;
+	while (vars->map[++j])
 	{
-		i = 0;
-		while (vars->map[j][i])
+		i = -1;
+		while (vars->map[j][++i])
 		{
-			if ((vars->map[j][i] == '1' || (vars->map[j][i] == 'E'
+			if (!do_overlap(x, y, i * TILE_SIZE, j * TILE_SIZE))
+				continue ;
+			if (vars->map[j][i] == '1' || (vars->map[j][i] == 'E'
 						&& vars->collected < vars->total_collectibles))
-				&& do_overlap(x, y, i * TILE_SIZE, j * TILE_SIZE))
 				return (1);
-			if (vars->map[vars->player->y / TILE_SIZE][vars->player->x
-				/ TILE_SIZE] == 'C')
+			if (vars->map[j][i] == 'C')
 			{
 				++vars->collected;
-				vars->map[vars->player->y / TILE_SIZE][vars->player->x
-					/ TILE_SIZE] = '0';
+				vars->map[j][i] = '0';
+				return (0);
 			}
-			i++;
 		}
-		j++;
 	}
 	return (0);
 }
@@ -78,13 +77,6 @@ void	game_won(t_vars *vars)
 		ft_printf("Congratulations! YOU HAVE WON!\n");
 		ft_printf("Is that the best you can do?\n");
 		ft_printf("Find a shorter path... :D");
-		free_images(vars);
-	}
-	if (vars->map[vars->player->y / TILE_SIZE][vars->player->x
-		/ TILE_SIZE] == 'C')
-	{
-		++vars->collected;
-		vars->map[vars->player->y / TILE_SIZE][vars->player->x
-			/ TILE_SIZE] = '0';
+		ft_free(vars, 0);
 	}
 }

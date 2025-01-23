@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:19:12 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/22 21:59:14 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/23 17:35:11 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 void	load_images(t_vars *vars)
 {
 	vars->base_image = NULL;
-	vars->background = add_image(vars, BACKGROUND, vars->background);
-	vars->wall = add_image(vars, WALL, vars->wall);
-	vars->player = add_image(vars, PLAYER, vars->player);
-	vars->collectible = add_image(vars, COLLECTIBLE, vars->collectible);
-	vars->exit = add_image(vars, EXIT, vars->exit);
+	vars->background = add_image(vars, BACKGROUND);
+	vars->wall = add_image(vars, WALL);
+	vars->player = add_image(vars, PLAYER);
+	vars->collectible = add_image(vars, COLLECTIBLE);
+	vars->exit = add_image(vars, EXIT);
+	vars->open_door = add_image(vars, OPEN_DOOR);
 }
 
 void	game_init(t_vars *vars)

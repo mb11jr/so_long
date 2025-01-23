@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 10:35:05 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/22 22:01:01 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/23 17:35:39 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	ft_free(t_vars *vars, int status)
 			ft_destroy_image(vars, vars->collectible);
 		if (vars->exit)
 			ft_destroy_image(vars, vars->exit);
+		if (vars->open_door)
+			ft_destroy_image(vars, vars->open_door);
 		mlx_destroy_window(vars->mlx, vars->win);
 		mlx_destroy_display(vars->mlx);
 		free(vars->mlx);

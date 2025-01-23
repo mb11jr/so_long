@@ -6,14 +6,16 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:36:31 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/22 22:00:33 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/23 17:23:56 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-t_obj	*add_image(t_vars *vars, char *filename, t_obj *img)
+t_obj	*add_image(t_vars *vars, char *filename)
 {
+	t_obj	*img;
+
 	img = malloc(sizeof(t_obj));
 	img->img = mlx_xpm_file_to_image(vars->mlx, filename, &img->width,
 			&img->height);
@@ -60,7 +62,7 @@ void	put_pixel_img(t_vars *vars, int x, int y, int color)
 
 	if (color == (int)0xFF000000)
 		return ;
-	if (x >= 0 && x < vars->win_width * TILE_SCALE && y >= 0 && y < vars->win_height* TILE_SCALE)
+	if (x >= 0 && x < vars->win_width * TILE_SCALE && y >= 0 && y < vars->win_height * TILE_SCALE)
 	{
 		pxl = vars->base_image->addr + (y * vars->base_image->line_length + x
 				* vars->base_image->bits_per_pixel / 8);

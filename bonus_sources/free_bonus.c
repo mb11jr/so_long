@@ -6,38 +6,75 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 10:34:42 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/19 22:15:36 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/23 16:36:58 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	ft_free(t_vars *vars, t_obj *obj)
+void ft_destroy_image(t_vars *vars, t_obj *obj)
 {
 	mlx_destroy_image(vars->mlx, obj->img);
 	free(obj);
 }
 
-void	free_images(t_vars *vars)
+void free_count_images(t_vars *vars)
+{
+	int i;
+
+	i = 0;
+	while (i < 10)
+	{
+		if (vars->count[i])
+			ft_destroy_image(vars, vars->count[i]);
+		i++;
+	}
+}
+
+void ft_free(t_vars *vars, int status)
 {
 	free_map(vars->map, vars->win_height / TILE_SIZE);
 	if (vars->mlx)
 	{
 		if (vars->base_image)
-			ft_free(vars, vars->base_image);
+			ft_destroy_image(vars, vars->base_image);
 		if (vars->background)
-			ft_free(vars, vars->background);
+			ft_destroy_image(vars, vars->background);
 		if (vars->wall)
-			ft_free(vars, vars->wall);
+			ft_destroy_image(vars, vars->wall);
 		if (vars->player)
-			ft_free(vars, vars->player);
+			ft_destroy_image(vars, vars->player);
 		if (vars->collectible)
-			ft_free(vars, vars->collectible);
+			ft_destroy_image(vars, vars->collectible);
 		if (vars->exit)
-			ft_free(vars, vars->exit);
+			ft_destroy_image(vars, vars->exit);
+		if (vars->text)
+			ft_destroy_image(vars, vars->text);
+		free_count_images(vars);
 		mlx_destroy_window(vars->mlx, vars->win);
 		mlx_destroy_display(vars->mlx);
 		free(vars->mlx);
 	}
-	exit(1);
+	exit(status);
+}
+
+void load_count_images(t_vars *vars)
+{
+	const char *paths[] = {
+		ZERO,
+		ONE,
+		TWO,
+		THREE,
+		FOUR,
+		FIVE,
+		SIX,
+		SEVEN,
+		EIGHT,
+		NINE
+	};
+	int i;
+
+	i = -1;
+	while (++i < 10)
+		vars->count[i] = add_image(vars, (char *)paths[i]);
 }
