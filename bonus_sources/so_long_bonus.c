@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 09:53:36 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/23 16:38:43 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/23 17:52:45 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,15 @@
 
 void	display_count(int keycode, t_vars *vars, int x, int y)
 {
-	char *str;
-	int i;
-	int index;
+	// char *str;
+	// int i;
+	// int index;
 
 	if (!check_wall_collision(vars, x, y) && (keycode == XK_w
 			|| keycode == XK_Up || keycode == XK_a || keycode == XK_Left
 			|| keycode == XK_s || keycode == XK_Down || keycode == XK_d
 			|| keycode == XK_Right))
 		++vars->moves;
-	str = ft_itoa(vars->moves);
-	i = 0;
-	while (str[i])
-	{
-		index = str[i] - '0';
-		ft_put_img_to_img(vars, vars->count[index], vars->text->width + i * TILE_SIZE, vars->text->height + i * TILE_SIZE);
-		// free(str[i]);
-		i++;
-	}
-	free(str);
 }
 
 int	keypress_handler(int keycode, t_vars *vars)

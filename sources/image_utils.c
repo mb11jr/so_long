@@ -62,7 +62,8 @@ void	put_pixel_img(t_vars *vars, int x, int y, int color)
 
 	if (color == (int)0xFF000000)
 		return ;
-	if (x >= 0 && x < vars->win_width * TILE_SCALE && y >= 0 && y < vars->win_height * TILE_SCALE)
+	if (x >= 0 && x < vars->win_width * TILE_SCALE && y >= 0
+		&& y < vars->win_height * TILE_SCALE)
 	{
 		pxl = vars->base_image->addr + (y * vars->base_image->line_length + x
 				* vars->base_image->bits_per_pixel / 8);
@@ -95,7 +96,8 @@ void	put_img_to_img(t_vars *vars, t_obj *src, int x, int y)
 				l = 0;
 				while (l < TILE_SCALE)
 				{
-					put_pixel_img(vars, (i + x) * TILE_SCALE + l , (j + y) * TILE_SCALE + k, get_pixel_img(src, i, j));
+					put_pixel_img(vars, (i + x) * TILE_SCALE + l, (j + y)
+						* TILE_SCALE + k, get_pixel_img(src, i, j));
 					l++;
 				}
 				k++;

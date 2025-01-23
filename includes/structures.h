@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 09:57:13 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/23 17:28:23 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/23 18:35:39 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,13 @@ typedef struct s_obj
 	int		line_length;
 	int		endian;
 }			t_obj;
+
+typedef struct s_point
+{
+	int x;
+	int y;
+} t_point;
+
 
 typedef struct s_vars
 {

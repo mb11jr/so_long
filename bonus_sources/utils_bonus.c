@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:19:12 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/23 16:28:13 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/23 17:50:25 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	load_images(t_vars *vars)
 	vars->collectible = add_image(vars, COLLECTIBLE);
 	vars->exit = add_image(vars, EXIT);
 	vars->text = add_image(vars, TEXT);
+	vars->open_door = add_image(vars, OPEN_DOOR);
 }
 
 void	game_init(t_vars *vars)

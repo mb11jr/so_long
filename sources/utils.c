@@ -56,7 +56,7 @@ int	check_wall_collision(t_vars *vars, int x, int y)
 			if (!do_overlap(x, y, i * TILE_SIZE, j * TILE_SIZE))
 				continue ;
 			if (vars->map[j][i] == '1' || (vars->map[j][i] == 'E'
-						&& vars->collected < vars->total_collectibles))
+					&& vars->collected < vars->total_collectibles))
 				return (1);
 			if (vars->map[j][i] == 'C')
 			{

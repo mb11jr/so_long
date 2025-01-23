@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:36:31 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/23 17:22:58 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/23 18:37:40 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,29 @@ void	put_img_to_img(t_vars *vars, t_obj *src, int x, int y)
 				k++;
 			}
 			j++;
+		}
+	}
+}
+void	put_scaledimg_to_img(t_vars *vars, t_obj *src, t_point pos, t_point scale)
+{
+	int	i;
+	int	j;
+	int	k;
+	int	l;
+
+	i = -1;
+	while (++i < src->width)
+	{
+		j = -1;
+		while (++j < src->height)
+		{
+			k = -1;
+			while (++k < scale.y)
+			{
+				l = -1;
+				while (++l < scale.x)
+					put_pixel_img(vars, (pos.x + i) * scale.x + l , (pos.y + j) * scale.y + k, get_pixel_img(src, i, j));
+			}
 		}
 	}
 }

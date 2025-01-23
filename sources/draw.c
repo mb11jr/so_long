@@ -33,9 +33,11 @@ int	draw(t_vars *vars)
 			if (vars->map[y][x] == 'E')
 			{
 				if (vars->collected == vars->total_collectibles)
-					put_img_to_img(vars, vars->open_door, x * TILE_SIZE, y * TILE_SIZE);
+					put_img_to_img(vars, vars->open_door, x * TILE_SIZE, y
+						* TILE_SIZE);
 				else
-					put_img_to_img(vars, vars->exit, x * TILE_SIZE, y * TILE_SIZE);
+					put_img_to_img(vars, vars->exit, x * TILE_SIZE, y
+						* TILE_SIZE);
 			}
 		}
 	}
@@ -49,8 +51,8 @@ int	render_game(t_vars *vars)
 		mlx_destroy_image(vars->mlx, vars->base_image->img);
 	free(vars->base_image);
 	vars->base_image = malloc(sizeof(t_obj));
-	vars->base_image->img = mlx_new_image(vars->mlx, vars->win_width * TILE_SCALE,
-			vars->win_height * TILE_SCALE);
+	vars->base_image->img = mlx_new_image(vars->mlx, vars->win_width
+			* TILE_SCALE, vars->win_height * TILE_SCALE);
 	vars->base_image->addr = mlx_get_data_addr(vars->base_image->img,
 			&vars->base_image->bits_per_pixel, &vars->base_image->line_length,
 			&vars->base_image->endian);

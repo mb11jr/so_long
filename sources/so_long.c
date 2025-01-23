@@ -68,8 +68,8 @@ int	main(int ac, char **av)
 	read_map(&vars, av[1]);
 	game_init(&vars);
 	map_parser(&vars);
-	vars.win = mlx_new_window(vars.mlx, vars.win_width * TILE_SCALE, vars.win_height * TILE_SCALE,
-			"Welcome to my 2D game");
+	vars.win = mlx_new_window(vars.mlx, vars.win_width * TILE_SCALE,
+			vars.win_height * TILE_SCALE, "Welcome to my 2D game");
 	mlx_hook(vars.win, KeyPress, KeyPressMask, keypress_handler, &vars);
 	mlx_hook(vars.win, DestroyNotify, NoEventMask, close_handler, &vars);
 	mlx_loop_hook(vars.mlx, render_game, &vars);

@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 14:30:52 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/23 17:34:07 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/23 18:38:36 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,18 @@
 # define EXIT "./textures/Exit/closed_door.xpm"
 # define OPEN_DOOR "./textures/Exit/open_door.xpm"
 # define TEXT "./textures/Count/totalmoves.xpm"
-# define ZERO "./textures/Count/0.xpm"
-# define ONE "./textures/Count/1.xpm"
-# define TWO "./textures/Count/2.xpm"
-# define THREE "./textures/Count/3.xpm"
-# define FOUR "./textures/Count/4.xpm"
-# define FIVE "./textures/Count/5.xpm"
-# define SIX "./textures/Count/6.xpm"
-# define SEVEN "./textures/Count/7.xpm"
-# define EIGHT "./textures/Count/8.xpm"
-# define NINE "./textures/Count/9.xpm"
+# define ZERO "./textures/numbers/0.xpm"
+# define ONE "./textures/numbers/1.xpm"
+# define TWO "./textures/numbers/2.xpm"
+# define THREE "./textures/numbers/3.xpm"
+# define FOUR "./textures/numbers/4.xpm"
+# define FIVE "./textures/numbers/5.xpm"
+# define SIX "./textures/numbers/6.xpm"
+# define SEVEN "./textures/numbers/7.xpm"
+# define EIGHT "./textures/numbers/8.xpm"
+# define NINE "./textures/numbers/9.xpm"
 
-
+void	put_scaledimg_to_img(t_vars *vars, t_obj *src, t_point pos, t_point scale);
 t_obj			*add_image(t_vars *vars, char *filename);
 void			get_player_position(t_vars *vars);
 void			put_pixel_img(t_vars *vars, int x, int y, int color);
