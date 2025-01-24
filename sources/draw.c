@@ -6,11 +6,20 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 17:44:20 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/23 17:29:13 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/24 21:37:11 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	draw_exit(t_vars *vars, int x, int y)
+{
+	if (vars->collected == vars->total_collectibles)
+		put_img_to_baseimage(vars, vars->open_door, x * TILE_SIZE, y
+			* TILE_SIZE);
+	else
+		put_img_to_baseimage(vars, vars->exit, x * TILE_SIZE, y * TILE_SIZE);
+}
 
 int	draw(t_vars *vars)
 {
@@ -23,25 +32,19 @@ int	draw(t_vars *vars)
 		x = -1;
 		while (vars->map[y][++x])
 		{
-			put_img_to_img(vars, vars->background, x * TILE_SIZE, y
+			put_img_to_baseimage(vars, vars->background, x * TILE_SIZE, y
 				* TILE_SIZE);
 			if (vars->map[y][x] == '1')
-				put_img_to_img(vars, vars->wall, x * TILE_SIZE, y * TILE_SIZE);
+				put_img_to_baseimage(vars, vars->wall, x * TILE_SIZE, y
+					* TILE_SIZE);
 			if (vars->map[y][x] == 'C')
-				put_img_to_img(vars, vars->collectible, x * TILE_SIZE, y
+				put_img_to_baseimage(vars, vars->collectible, x * TILE_SIZE, y
 					* TILE_SIZE);
 			if (vars->map[y][x] == 'E')
-			{
-				if (vars->collected == vars->total_collectibles)
-					put_img_to_img(vars, vars->open_door, x * TILE_SIZE, y
-						* TILE_SIZE);
-				else
-					put_img_to_img(vars, vars->exit, x * TILE_SIZE, y
-						* TILE_SIZE);
-			}
+				draw_exit(vars, x, y);
 		}
 	}
-	put_img_to_img(vars, vars->player, vars->player->x, vars->player->y);
+	put_img_to_baseimage(vars, vars->player, vars->player->x, vars->player->y);
 	return (0);
 }
 

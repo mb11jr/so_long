@@ -6,11 +6,20 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 17:44:20 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/23 18:49:45 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/24 21:38:02 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	draw_exit(t_vars *vars, int x, int y)
+{
+	if (vars->collected == vars->total_collectibles)
+		put_img_to_baseimage(vars, vars->open_door, x * TILE_SIZE, y
+			* TILE_SIZE);
+	else
+		put_img_to_baseimage(vars, vars->exit, x * TILE_SIZE, y * TILE_SIZE);
+}
 
 int	draw(t_vars *vars)
 {
@@ -23,27 +32,21 @@ int	draw(t_vars *vars)
 		x = 0;
 		while (vars->map[y][x])
 		{
-			put_img_to_img(vars, vars->background, x * TILE_SIZE, y
+			put_img_to_baseimage(vars, vars->background, x * TILE_SIZE, y
 				* TILE_SIZE);
 			if (vars->map[y][x] == '1')
-				put_img_to_img(vars, vars->wall, x * TILE_SIZE, y * TILE_SIZE);
+				put_img_to_baseimage(vars, vars->wall, x * TILE_SIZE, y
+					* TILE_SIZE);
 			if (vars->map[y][x] == 'C')
-				put_img_to_img(vars, vars->collectible, x * TILE_SIZE, y
+				put_img_to_baseimage(vars, vars->collectible, x * TILE_SIZE, y
 					* TILE_SIZE);
 			if (vars->map[y][x] == 'E')
-			{
-				if (vars->collected == vars->total_collectibles)
-					put_img_to_img(vars, vars->open_door, x * TILE_SIZE, y
-						* TILE_SIZE);
-				else
-					put_img_to_img(vars, vars->exit, x * TILE_SIZE, y
-						* TILE_SIZE);
-			}
+				draw_exit(vars, x, y);
 			x++;
 		}
 		y++;
 	}
-	put_img_to_img(vars, vars->player, vars->player->x, vars->player->y);
+	put_img_to_baseimage(vars, vars->player, vars->player->x, vars->player->y);
 	return (0);
 }
 
@@ -58,8 +61,8 @@ void	draw_count(t_vars *vars)
 	while (str[i])
 	{
 		img = vars->count[str[i] - '0'];
-		put_scaledimg_to_img(vars, img, (t_point){(i * img->width) + (img->width
-				* 0.5), (img->height * 0.5)}, (t_point){6, 5});
+		put_scaledimg_to_baseimage(vars, img, (t_point){(i * img->width)
+			+ (img->width * 0.5), (img->height * 0.5)}, (t_point){6, 5});
 		i++;
 	}
 	free(str);

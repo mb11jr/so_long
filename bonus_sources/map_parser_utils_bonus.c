@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_parser_utils.c                                 :+:      :+:    :+:   */
+/*   map_parser_utils_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:05:32 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/11 15:03:12 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/24 21:18:56 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	valid_map(t_vars *vars)
 		{
 			if (vars->map[i][j] != '1' && vars->map[i][j] != 'C'
 				&& vars->map[i][j] != 'E' && vars->map[i][j] != '0'
-				&& vars->map[i][j] != 'P')
+				&& vars->map[i][j] != 'P' && vars->map[i][j] != 'E')
 				return (0);
 			j++;
 		}

@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 12:11:32 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/23 10:55:10 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/24 22:01:49 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,21 +93,22 @@ int	check_path(t_vars *vars)
 void	map_parser(t_vars *vars)
 {
 	if (!valid_map(vars))
-		error_msg("The map is invalid! There are unrecognizable characters.");
+		error_msg(vars,
+			"The map is invalid! There are unrecognizable characters.");
 	if (!is_rectangular(vars))
-		error_msg("The map is not rectangular!");
+		error_msg(vars, "The map is not rectangular!");
 	if (!enclosed_in_walls(vars))
-		error_msg("The map is not enclosed in walls!");
+		error_msg(vars, "The map is not enclosed in walls!");
 	if (!check_exit_start(vars))
-		error_msg("The map doesn't contain exactly one player and one exit!");
+		error_msg(vars,
+			"The map doesn't contain exactly one player and one exit!");
 	if (count_collectibles(vars) < 1)
-		error_msg("The map must have at least one collectible!");
+		error_msg(vars, "The map must have at least one collectible!");
 	if (!check_path(vars))
-	{
-		error_msg("No valid path in the map: the player can't reach the exit.");
-	}
+		error_msg(vars,
+			"No valid path in the map: the player can't reach the exit.");
 	if (vars->win_width > 1920)
-		error_msg("The map exceeds the maximum window width!");
+		error_msg(vars, "The map exceeds the maximum window width!");
 	if (vars->win_height > 1080)
-		error_msg("The map exceeds the maximum window height!");
+		error_msg(vars, "The map exceeds the maximum window height!");
 }

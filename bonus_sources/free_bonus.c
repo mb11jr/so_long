@@ -6,21 +6,21 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 10:34:42 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/23 18:48:29 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/24 22:52:25 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void ft_destroy_image(t_vars *vars, t_obj *obj)
+void	ft_destroy_image(t_vars *vars, t_obj *obj)
 {
 	mlx_destroy_image(vars->mlx, obj->img);
 	free(obj);
 }
 
-void free_count_images(t_vars *vars)
+void	free_count_images(t_vars *vars)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < 10)
@@ -31,9 +31,10 @@ void free_count_images(t_vars *vars)
 	}
 }
 
-void ft_free(t_vars *vars, int status)
+void	ft_free(t_vars *vars, int status)
 {
-	free_map(vars->map, vars->win_height / TILE_SIZE);
+	if (vars->map)
+		free_map(vars->map, vars->win_height / TILE_SIZE);
 	if (vars->mlx)
 	{
 		if (vars->base_image)
@@ -51,28 +52,19 @@ void ft_free(t_vars *vars, int status)
 		if (vars->open_door)
 			ft_destroy_image(vars, vars->open_door);
 		free_count_images(vars);
-		mlx_destroy_window(vars->mlx, vars->win);
+		if (vars->win)
+			mlx_destroy_window(vars->mlx, vars->win);
 		mlx_destroy_display(vars->mlx);
 		free(vars->mlx);
 	}
 	exit(status);
 }
 
-void load_count_images(t_vars *vars)
+void	load_count_images(t_vars *vars)
 {
-	const char *paths[] = {
-		ZERO,
-		ONE,
-		TWO,
-		THREE,
-		FOUR,
-		FIVE,
-		SIX,
-		SEVEN,
-		EIGHT,
-		NINE
-	};
-	int i;
+	int			i;
+	const char	*paths[] = {ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN,
+		EIGHT, NINE};
 
 	i = -1;
 	while (++i < 10)

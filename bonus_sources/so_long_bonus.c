@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 09:53:36 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/23 17:52:45 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/24 22:52:39 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 
 void	display_count(int keycode, t_vars *vars, int x, int y)
 {
-	// char *str;
-	// int i;
-	// int index;
-
 	if (!check_wall_collision(vars, x, y) && (keycode == XK_w
 			|| keycode == XK_Up || keycode == XK_a || keycode == XK_Left
 			|| keycode == XK_s || keycode == XK_Down || keycode == XK_d
@@ -61,21 +57,20 @@ int	main(int ac, char **av)
 {
 	t_vars	vars;
 
-	ft_bzero(&vars, sizeof(t_vars));
 	if (ac <= 1)
-		error_msg("No map specified.");
+		error_msg(&vars, "No map specified.");
 	if (ac > 2)
-		error_msg("Too many arguments!");
-	if (ac == 2 && !check_map_name(av[1]))
-		error_msg("Wrong file extension! Make sure it ends with .ber");
+		error_msg(&vars, "Too many arguments!");
+	if (ac == 2 && !check_map_extension(av[1]))
+		error_msg(&vars, "Wrong file extension! Make sure it ends with .ber");
 	vars.mlx = mlx_init();
 	load_images(&vars);
 	load_count_images(&vars);
 	read_map(&vars, av[1]);
 	game_init(&vars);
 	map_parser(&vars);
-	vars.win = mlx_new_window(vars.mlx, vars.win_width * TILE_SCALE, vars.win_height * TILE_SCALE,
-			"Welcome to my 2D game");
+	vars.win = mlx_new_window(vars.mlx, vars.win_width * TILE_SCALE,
+			vars.win_height * TILE_SCALE, "Welcome to my 2D game");
 	mlx_hook(vars.win, KeyPress, KeyPressMask, keypress_handler, &vars);
 	mlx_hook(vars.win, DestroyNotify, NoEventMask, close_handler, &vars);
 	mlx_loop_hook(vars.mlx, render_game, &vars);

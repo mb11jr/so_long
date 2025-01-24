@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:19:12 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/23 17:50:25 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/24 22:48:15 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	load_images(t_vars *vars)
 	vars->player = add_image(vars, PLAYER);
 	vars->collectible = add_image(vars, COLLECTIBLE);
 	vars->exit = add_image(vars, EXIT);
-	vars->text = add_image(vars, TEXT);
 	vars->open_door = add_image(vars, OPEN_DOOR);
 }
 
@@ -57,7 +56,7 @@ int	check_wall_collision(t_vars *vars, int x, int y)
 			if (!do_overlap(x, y, i * TILE_SIZE, j * TILE_SIZE))
 				continue ;
 			if (vars->map[j][i] == '1' || (vars->map[j][i] == 'E'
-						&& vars->collected < vars->total_collectibles))
+					&& vars->collected < vars->total_collectibles))
 				return (1);
 			if (vars->map[j][i] == 'C')
 			{
@@ -75,8 +74,10 @@ void	game_won(t_vars *vars)
 	if (vars->map[vars->player->y / TILE_SIZE][vars->player->x
 		/ TILE_SIZE] == 'E' && vars->collected == vars->total_collectibles)
 	{
-		ft_printf("Congratulations! YOU HAVE WON!\n");
+		ft_printf("\n\nCongratulations! YOU HAVE WON!\n");
+		ft_printf("______________________________\n");
 		ft_printf("Is that the best you can do?\n");
+		ft_printf("______________________________\n");
 		ft_printf("Find a shorter path... :D");
 		ft_free(vars, 0);
 	}

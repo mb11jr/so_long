@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:19:12 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/23 17:35:11 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/24 22:48:26 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,10 @@ void	game_won(t_vars *vars)
 	if (vars->map[vars->player->y / TILE_SIZE][vars->player->x
 		/ TILE_SIZE] == 'E' && vars->collected == vars->total_collectibles)
 	{
-		ft_printf("\nCongratulations! YOU HAVE WON!\n");
+		ft_printf("\n\nCongratulations! YOU HAVE WON!\n");
+		ft_printf("______________________________\n");
 		ft_printf("Is that the best you can do?\n");
+		ft_printf("______________________________\n");
 		ft_printf("Find a shorter path... :D");
 		ft_free(vars, 0);
 	}

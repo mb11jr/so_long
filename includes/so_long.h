@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 14:30:52 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/23 18:38:36 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/24 22:49:54 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@
 # define COLLECTIBLE "./textures/Collectibles/fruit.xpm"
 # define EXIT "./textures/Exit/closed_door.xpm"
 # define OPEN_DOOR "./textures/Exit/open_door.xpm"
-# define TEXT "./textures/Count/totalmoves.xpm"
 # define ZERO "./textures/numbers/0.xpm"
 # define ONE "./textures/numbers/1.xpm"
 # define TWO "./textures/numbers/2.xpm"
@@ -45,31 +44,43 @@
 # define EIGHT "./textures/numbers/8.xpm"
 # define NINE "./textures/numbers/9.xpm"
 
-void	put_scaledimg_to_img(t_vars *vars, t_obj *src, t_point pos, t_point scale);
+void			draw_exit(t_vars *vars, int x, int y);
+void			draw_count(t_vars *vars);
+int				draw(t_vars *vars);
+int				render_game(t_vars *vars);
+void			ft_destroy_image(t_vars *vars, t_obj *obj);
+void			ft_free(t_vars *vars, int status);
+void			load_count_images(t_vars *vars);
 t_obj			*add_image(t_vars *vars, char *filename);
 void			get_player_position(t_vars *vars);
 void			put_pixel_img(t_vars *vars, int x, int y, int color);
 unsigned int	get_pixel_img(t_obj *img, int x, int y);
-void			put_img_to_img(t_vars *vars, t_obj *src, int x, int y);
-void	ft_put_img_to_img(t_vars *vars, t_obj *src, int x, int y);
-int				render_game(t_vars *vars);
-void			read_map(t_vars *vars, char *path);
-void			map_parser(t_vars *vars);
+void			put_img_to_baseimage(t_vars *vars, t_obj *src, int x, int y);
+void			put_scaledimg_to_baseimage(t_vars *vars, t_obj *src,
+					t_point pos, t_point scale);
 int				is_rectangular(t_vars *vars);
 int				enclosed_in_walls(t_vars *vars);
 int				check_exit_start(t_vars *vars);
 int				valid_map(t_vars *vars);
-int				ft_linelen(char *s);
-void			total_collectibles(t_vars *vars);
 int				count_collectibles(t_vars *vars);
-int				check_map_name(char *s);
-void			game_won(t_vars *vars);
-int				check_wall_collision(t_vars *vars, int x, int y);
-void			game_init(t_vars *vars);
-void			load_images(t_vars *vars);
-void            load_count_images(t_vars *vars);
-void			error_msg(char *s);
+void			flood_fill(t_vars *vars, char **map, int x, int y);
+char			**clone_map(char **original, int height, int width);
 void			free_map(char **map, int height);
-void	        ft_destroy_image(t_vars *vars, t_obj *obj);
-void	        ft_free(t_vars *vars, int status);
+int				check_path(t_vars *vars);
+void			map_parser(t_vars *vars);
+int				check_map_extension(char *s);
+void			total_collectibles(t_vars *vars);
+int				ft_linelen(char *s);
+void			error_msg(t_vars *vars, char *s);
+int				map_height(t_vars *vars, int fd);
+void			read_map(t_vars *vars, char *path);
+void			display_count(int keycode, t_vars *vars, int x, int y);
+int				keypress_handler(int keycode, t_vars *vars);
+int				close_handler(t_vars *vars);
+void			load_images(t_vars *vars);
+void			game_init(t_vars *vars);
+int				do_overlap(int ax, int ay, int bx, int by);
+int				check_wall_collision(t_vars *vars, int x, int y);
+void			game_won(t_vars *vars);
+
 #endif
