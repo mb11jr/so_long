@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 12:11:32 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/24 22:01:49 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/25 11:31:21 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	check_path(t_vars *vars)
 
 	map = clone_map(vars->map, vars->win_height / TILE_SIZE, vars->win_width
 			/ TILE_SIZE);
-	flood_fill(vars, map, vars->player->x / TILE_SIZE, vars->player->y
+	flood_fill(vars, map, vars->pos.x / TILE_SIZE, vars->pos.y
 		/ TILE_SIZE);
 	free_map(map, vars->win_height / TILE_SIZE);
 	if (vars->reachable_collectibles == vars->total_collectibles
@@ -92,23 +92,20 @@ int	check_path(t_vars *vars)
 
 void	map_parser(t_vars *vars)
 {
-	if (!valid_map(vars))
-		error_msg(vars,
-			"The map is invalid! There are unrecognizable characters.");
+	if (!validate_map(vars))
+		free_and_exit(vars, 3, "The map is invalid! There are unrecognizable characters.");
 	if (!is_rectangular(vars))
-		error_msg(vars, "The map is not rectangular!");
+		free_and_exit(vars, 3, "The map is not rectangular!");
 	if (!enclosed_in_walls(vars))
-		error_msg(vars, "The map is not enclosed in walls!");
+		free_and_exit(vars, 3, "The map is not enclosed in walls!");
 	if (!check_exit_start(vars))
-		error_msg(vars,
-			"The map doesn't contain exactly one player and one exit!");
-	if (count_collectibles(vars) < 1)
-		error_msg(vars, "The map must have at least one collectible!");
+		free_and_exit(vars, 3, "The map doesn't contain exactly one player and one exit!");
+	if (vars->total_collectibles < 1)
+		free_and_exit(vars, 3, "The map must have at least one collectible!");
 	if (!check_path(vars))
-		error_msg(vars,
-			"No valid path in the map: the player can't reach the exit.");
+		free_and_exit(vars, 3, "No valid path in the map: the player can't reach the exit.");
 	if (vars->win_width > 1920)
-		error_msg(vars, "The map exceeds the maximum window width!");
+		free_and_exit(vars, 3, "The map exceeds the maximum window width!");
 	if (vars->win_height > 1080)
-		error_msg(vars, "The map exceeds the maximum window height!");
+		free_and_exit(vars, 3, "The map exceeds the maximum window height!");
 }

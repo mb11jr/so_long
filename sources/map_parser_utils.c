@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:05:32 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/24 22:54:13 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/25 12:13:55 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,46 +80,36 @@ int	check_exit_start(t_vars *vars)
 	return (1);
 }
 
-int	valid_map(t_vars *vars)
+int	validate_map(t_vars *vars)
 {
-	int	i;
-	int	j;
+	int	x;
+	int	y;
 
-	i = 0;
-	while (vars->map[i])
+	y = 0;
+	while (vars->map[y])
 	{
-		j = 0;
-		while (vars->map[i][j])
+		x = 0;
+		while (vars->map[y][x])
 		{
-			if (vars->map[i][j] != '1' && vars->map[i][j] != 'C'
-				&& vars->map[i][j] != 'E' && vars->map[i][j] != '0'
-				&& vars->map[i][j] != 'P')
+			if (!ft_strchr("10CEP", vars->map[y][x]))
 				return (0);
-			j++;
+			if (vars->map[y][x] == 'P')
+				vars->pos = (t_point){.x = x * TILE_SIZE, .y = y * TILE_SIZE};
+			if (vars->map[y][x] == 'C')
+				vars->total_collectibles++;
+			x++;
 		}
-		i++;
+		y++;
 	}
 	return (1);
 }
 
-int	count_collectibles(t_vars *vars)
+int	check_map_extension(char *s)
 {
 	int	i;
-	int	j;
-	int	count;
 
-	count = 0;
-	i = 0;
-	while (vars->map[i])
-	{
-		j = 0;
-		while (vars->map[i][j])
-		{
-			if (vars->map[i][j] == 'C')
-				count++;
-			j++;
-		}
-		i++;
-	}
-	return (count);
+	i = ft_strlen(s) - 1;
+	if (s[i] == 'r' && s[i - 1] == 'e' && s[i - 2] == 'b' && s[i - 3] == '.')
+		return (1);
+	return (0);
 }

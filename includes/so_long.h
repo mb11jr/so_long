@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 14:30:52 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/24 22:49:54 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/25 11:49:35 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <unistd.h>
 
 # define TILE_SIZE 48
-# define SPEED 12
+# define SPEED 24
 # define TILE_SCALE 2
 # define BACKGROUND "./textures/Background/Background01.xpm"
 # define WALL "./textures/Background/Wall.xpm"
@@ -50,9 +50,9 @@ int				draw(t_vars *vars);
 int				render_game(t_vars *vars);
 void			ft_destroy_image(t_vars *vars, t_obj *obj);
 void			ft_free(t_vars *vars, int status);
+void			free_and_exit(t_vars *vars, int status, char *s);
 void			load_count_images(t_vars *vars);
 t_obj			*add_image(t_vars *vars, char *filename);
-void			get_player_position(t_vars *vars);
 void			put_pixel_img(t_vars *vars, int x, int y, int color);
 unsigned int	get_pixel_img(t_obj *img, int x, int y);
 void			put_img_to_baseimage(t_vars *vars, t_obj *src, int x, int y);
@@ -61,24 +61,21 @@ void			put_scaledimg_to_baseimage(t_vars *vars, t_obj *src,
 int				is_rectangular(t_vars *vars);
 int				enclosed_in_walls(t_vars *vars);
 int				check_exit_start(t_vars *vars);
-int				valid_map(t_vars *vars);
-int				count_collectibles(t_vars *vars);
+int				validate_map(t_vars *vars);
 void			flood_fill(t_vars *vars, char **map, int x, int y);
 char			**clone_map(char **original, int height, int width);
 void			free_map(char **map, int height);
 int				check_path(t_vars *vars);
 void			map_parser(t_vars *vars);
 int				check_map_extension(char *s);
-void			total_collectibles(t_vars *vars);
 int				ft_linelen(char *s);
-void			error_msg(t_vars *vars, char *s);
+void			error_msg(char *s);
 int				map_height(t_vars *vars, int fd);
 void			read_map(t_vars *vars, char *path);
 void			display_count(int keycode, t_vars *vars, int x, int y);
 int				keypress_handler(int keycode, t_vars *vars);
 int				close_handler(t_vars *vars);
 void			load_images(t_vars *vars);
-void			game_init(t_vars *vars);
 int				do_overlap(int ax, int ay, int bx, int by);
 int				check_wall_collision(t_vars *vars, int x, int y);
 void			game_won(t_vars *vars);

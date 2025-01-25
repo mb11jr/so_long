@@ -1,14 +1,14 @@
 NAME = so_long
 CC = cc
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3
 HEADERS = $(addprefix includes/, so_long.h structures.h)
 INCLUDES =  -Iincludes -I/usr/local/include
 MLX_FLAGS = -L/usr/local/lib -lmlx_Linux -lXext -lX11 -lm -lz
-SRC = $(addprefix sources/, so_long.c map_utils.c utils.c draw.c free.c\
+SRC = $(addprefix sources/, so_long.c game_utils.c draw.c free.c\
 		read_map.c map_parser.c map_parser_utils.c image_utils.c)
 OBJ = $(SRC:.c=.o)
-BONUS_SRC = $(addprefix bonus_sources/, so_long_bonus.c map_utils_bonus.c utils_bonus.c draw_bonus.c free_bonus.c \
+BONUS_SRC = $(addprefix bonus_sources/, so_long_bonus.c map_utils_bonus.c game_utils_bonus.c draw_bonus.c free_bonus.c \
 			read_map_bonus.c map_parser_bonus.c map_parser_utils_bonus.c image_utils_bonus.c image_utils2_bonus.c)
 BONUS_OBJ = $(BONUS_SRC:.c=.o)
 

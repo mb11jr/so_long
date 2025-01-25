@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 17:44:20 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/24 21:37:11 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/25 11:22:42 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	draw(t_vars *vars)
 				draw_exit(vars, x, y);
 		}
 	}
-	put_img_to_baseimage(vars, vars->player, vars->player->x, vars->player->y);
+	put_img_to_baseimage(vars, vars->player, vars->pos.x, vars->pos.y);
 	return (0);
 }
 

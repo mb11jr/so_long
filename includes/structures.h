@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 09:57:13 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/24 22:09:19 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/25 12:09:10 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ typedef struct s_obj
 	void	*img;
 	int		width;
 	int		height;
-	int		x;
-	int		y;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
@@ -43,6 +41,7 @@ typedef struct s_vars
 	t_obj	*background;
 	t_obj	*wall;
 	t_obj	*player;
+	t_point pos;
 	t_obj	*collectible;
 	t_obj	*exit;
 	t_obj	*open_door;

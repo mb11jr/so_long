@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:36:31 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/24 22:51:43 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/25 10:52:33 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,28 +27,6 @@ t_obj	*add_image(t_vars *vars, char *filename)
 	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,
 			&img->line_length, &img->endian);
 	return (img);
-}
-
-void	get_player_position(t_vars *vars)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (vars->map[y])
-	{
-		x = 0;
-		while (vars->map[y][x])
-		{
-			if (vars->map[y][x] == 'P')
-			{
-				vars->player->x = x * TILE_SIZE;
-				vars->player->y = y * TILE_SIZE;
-			}
-			x++;
-		}
-		y++;
-	}
 }
 
 void	put_pixel_img(t_vars *vars, int x, int y, int color)

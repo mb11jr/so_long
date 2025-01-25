@@ -6,17 +6,17 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 14:34:15 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/24 22:52:08 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/25 12:16:36 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	error_msg(t_vars *vars, char *s)
+void	error_msg(char *s)
 {
 	ft_printf("Error!\n");
 	ft_printf("%s\n", s);
-	ft_free(vars, 3);
+	exit(3);
 }
 
 int	map_height(t_vars *vars, int fd)
@@ -36,7 +36,7 @@ int	map_height(t_vars *vars, int fd)
 	}
 	vars->win_height = TILE_SIZE * rows;
 	if (!vars->win_height || !vars->win_width)
-		error_msg(vars, "The map file is empty!");
+		free_and_exit(vars, 3, "The map file is empty!");
 	return (rows);
 }
 
@@ -48,7 +48,7 @@ void	read_map(t_vars *vars, char *path)
 
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
-		error_msg(vars, "The map file doesn't exist!");
+		free_and_exit(vars, 3, "The map file doesn't exist!");
 	rows = map_height(vars, fd);
 	vars->map = malloc((rows + 1) * sizeof(char *));
 	fd = open(path, O_RDONLY);
@@ -62,4 +62,14 @@ void	read_map(t_vars *vars, char *path)
 	}
 	vars->map[rows] = NULL;
 	close(fd);
+}
+
+int	ft_linelen(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] && s[i] != '\n')
+		i++;
+	return (i);
 }

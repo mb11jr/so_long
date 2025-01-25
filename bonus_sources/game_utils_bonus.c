@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   game_utils_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:19:12 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/24 22:48:26 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/25 12:18:13 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	load_images(t_vars *vars)
 {
-	vars->base_image = NULL;
 	vars->background = add_image(vars, BACKGROUND);
 	vars->wall = add_image(vars, WALL);
 	vars->player = add_image(vars, PLAYER);
@@ -23,14 +22,15 @@ void	load_images(t_vars *vars)
 	vars->open_door = add_image(vars, OPEN_DOOR);
 }
 
-void	game_init(t_vars *vars)
+void	load_count_images(t_vars *vars)
 {
-	get_player_position(vars);
-	vars->collected = 0;
-	vars->reachable_exit = 0;
-	vars->reachable_collectibles = 0;
-	vars->moves = 0;
-	vars->total_collectibles = count_collectibles(vars);
+	int			i;
+	const char	*paths[] = {ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN,
+		EIGHT, NINE};
+
+	i = -1;
+	while (++i < 10)
+		vars->count[i] = add_image(vars, (char *)paths[i]);
 }
 
 int	do_overlap(int ax, int ay, int bx, int by)
@@ -71,7 +71,7 @@ int	check_wall_collision(t_vars *vars, int x, int y)
 
 void	game_won(t_vars *vars)
 {
-	if (vars->map[vars->player->y / TILE_SIZE][vars->player->x
+	if (vars->map[vars->pos.y / TILE_SIZE][vars->pos.x
 		/ TILE_SIZE] == 'E' && vars->collected == vars->total_collectibles)
 	{
 		ft_printf("\n\nCongratulations! YOU HAVE WON!\n");

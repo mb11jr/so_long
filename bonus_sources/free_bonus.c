@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 10:34:42 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/24 22:52:25 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/25 12:17:47 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,9 @@ void	ft_free(t_vars *vars, int status)
 	exit(status);
 }
 
-void	load_count_images(t_vars *vars)
+void	free_and_exit(t_vars *vars, int status, char *s)
 {
-	int			i;
-	const char	*paths[] = {ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN,
-		EIGHT, NINE};
-
-	i = -1;
-	while (++i < 10)
-		vars->count[i] = add_image(vars, (char *)paths[i]);
+	ft_printf("Error!\n");
+	ft_printf("%s\n", s);
+	ft_free(vars, status);
 }
