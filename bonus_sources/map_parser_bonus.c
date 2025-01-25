@@ -81,8 +81,7 @@ int	check_path(t_vars *vars)
 
 	map = clone_map(vars->map, vars->win_height / TILE_SIZE, vars->win_width
 			/ TILE_SIZE);
-	flood_fill(vars, map, vars->pos.x / TILE_SIZE, vars->pos.y
-		/ TILE_SIZE);
+	flood_fill(vars, map, vars->pos.x / TILE_SIZE, vars->pos.y / TILE_SIZE);
 	free_map(map, vars->win_height / TILE_SIZE);
 	if (vars->reachable_collectibles == vars->total_collectibles
 		&& vars->reachable_exit == 1)
@@ -93,17 +92,20 @@ int	check_path(t_vars *vars)
 void	map_parser(t_vars *vars)
 {
 	if (!validate_map(vars))
-		free_and_exit(vars, 3, "The map is invalid! There are unrecognizable characters.");
+		free_and_exit(vars, 3,
+			"The map is invalid! There are unrecognizable characters.");
 	if (!is_rectangular(vars))
 		free_and_exit(vars, 3, "The map is not rectangular!");
 	if (!enclosed_in_walls(vars))
 		free_and_exit(vars, 3, "The map is not enclosed in walls!");
 	if (!check_exit_start(vars))
-		free_and_exit(vars, 3, "The map doesn't contain exactly one player and one exit!");
+		free_and_exit(vars, 3,
+			"The map doesn't contain exactly one player and one exit!");
 	if (vars->total_collectibles < 1)
 		free_and_exit(vars, 3, "The map must have at least one collectible!");
 	if (!check_path(vars))
-		free_and_exit(vars, 3, "No valid path in the map: the player can't reach the exit.");
+		free_and_exit(vars, 3,
+			"No valid path in the map: the player can't reach the exit.");
 	if (vars->win_width > 1920)
 		free_and_exit(vars, 3, "The map exceeds the maximum window width!");
 	if (vars->win_height > 1080)

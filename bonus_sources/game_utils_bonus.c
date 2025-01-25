@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:19:12 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/25 12:18:13 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/25 12:32:52 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ int	check_wall_collision(t_vars *vars, int x, int y)
 
 void	game_won(t_vars *vars)
 {
-	if (vars->map[vars->pos.y / TILE_SIZE][vars->pos.x
-		/ TILE_SIZE] == 'E' && vars->collected == vars->total_collectibles)
+	if (vars->map[vars->pos.y / TILE_SIZE][vars->pos.x / TILE_SIZE] == 'E'
+		&& vars->collected == vars->total_collectibles)
 	{
 		ft_printf("\n\nCongratulations! YOU HAVE WON!\n");
 		ft_printf("______________________________\n");

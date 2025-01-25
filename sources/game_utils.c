@@ -60,8 +60,8 @@ int	check_wall_collision(t_vars *vars, int x, int y)
 
 void	game_won(t_vars *vars)
 {
-	if (vars->map[vars->pos.y / TILE_SIZE][vars->pos.x
-		/ TILE_SIZE] == 'E' && vars->collected == vars->total_collectibles)
+	if (vars->map[vars->pos.y / TILE_SIZE][vars->pos.x / TILE_SIZE] == 'E'
+		&& vars->collected == vars->total_collectibles)
 	{
 		ft_printf("\n\nCongratulations! YOU HAVE WON!\n");
 		ft_printf("______________________________\n");

@@ -30,7 +30,7 @@ void	display_count(int keycode, t_vars *vars, int x, int y)
 // 	if (keycode == XK_a || keycode == XK_Left)
 // 	{
 // 		x -= SPEED;
-		
+
 // 	}
 // 	if (keycode == XK_s || keycode == XK_Down)
 // 		y += SPEED;
