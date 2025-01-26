@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 10:35:05 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/25 12:11:41 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/26 14:41:02 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ void	ft_free(t_vars *vars, int status)
 		ft_destroy_image(vars, vars->background);
 	if (vars->wall)
 		ft_destroy_image(vars, vars->wall);
-	if (vars->player)
-		ft_destroy_image(vars, vars->player);
+	if (vars->player_right)
+		ft_destroy_image(vars, vars->player_right);
+	if (vars->player_left)
+		ft_destroy_image(vars, vars->player_left);
 	if (vars->collectible)
 		ft_destroy_image(vars, vars->collectible);
 	if (vars->exit)

@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 14:30:52 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/26 12:22:40 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/26 15:10:22 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@
 # define TILE_SCALE 2
 # define BACKGROUND "./textures/Background/Background01.xpm"
 # define WALL "./textures/Background/Wall.xpm"
-# define PLAYER "./textures/Player/player_to_right.xpm"
+# define PLAYER_TO_RIGHT "./textures/Player/player_to_right.xpm"
+# define PLAYER_TO_LEFT "./textures/Player/player_to_left.xpm"
 # define COLLECTIBLE "./textures/Collectibles/fruit.xpm"
 # define EXIT "./textures/Exit/closed_door.xpm"
 # define OPEN_DOOR "./textures/Exit/open_door.xpm"
@@ -47,6 +48,7 @@
 
 void			draw_exit(t_vars *vars, int x, int y);
 void			draw_count(t_vars *vars);
+void			draw_player(t_vars *vars);
 int				draw(t_vars *vars);
 int				render_game(t_vars *vars);
 void			ft_destroy_image(t_vars *vars, t_obj *obj);
@@ -74,6 +76,7 @@ void			error_msg(char *s);
 int				map_height(t_vars *vars, int fd);
 void			read_map(t_vars *vars, char *path);
 void			display_count(int keycode, t_vars *vars, int x, int y);
+void			update_player_position(int keycode, t_vars *vars, t_point *pos);
 int				keypress_handler(int keycode, t_vars *vars);
 int				close_handler(t_vars *vars);
 void			load_images(t_vars *vars);

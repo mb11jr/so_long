@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 17:44:20 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/25 11:22:42 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/26 14:55:59 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,14 @@ void	draw_exit(t_vars *vars, int x, int y)
 			* TILE_SIZE);
 	else
 		put_img_to_baseimage(vars, vars->exit, x * TILE_SIZE, y * TILE_SIZE);
+}
+
+void	draw_player(t_vars *vars)
+{
+	if (vars->direction)
+		put_img_to_baseimage(vars, vars->player_left, vars->pos.x, vars->pos.y);
+	else
+		put_img_to_baseimage(vars, vars->player_right, vars->pos.x, vars->pos.y);
 }
 
 int	draw(t_vars *vars)
@@ -44,7 +52,7 @@ int	draw(t_vars *vars)
 				draw_exit(vars, x, y);
 		}
 	}
-	put_img_to_baseimage(vars, vars->player, vars->pos.x, vars->pos.y);
+	draw_player(vars);
 	return (0);
 }
 

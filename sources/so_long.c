@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 09:53:36 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/25 12:09:55 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/26 15:07:10 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,46 +21,36 @@ void	display_count(int keycode, t_vars *vars, int x, int y)
 		ft_printf("\r\033[KTotal moves: %d", ++vars->moves);
 }
 
-// int	update_player_position(int keycode, t_vars *vars, int x, int y)
-// {
-// 	if (keycode == XK_Escape)
-// 		ft_free(vars, 0);
-// 	if (keycode == XK_w || keycode == XK_Up)
-// 		y -= SPEED;
-// 	if (keycode == XK_a || keycode == XK_Left)
-// 	{
-// 		x -= SPEED;
-
-// 	}
-// 	if (keycode == XK_s || keycode == XK_Down)
-// 		y += SPEED;
-// 	if (keycode == XK_d || keycode == XK_Right)
-// 		x += SPEED;
-// 	if (check_wall_collision(vars, x, y))
-// 		return (0);
-// }
-int	keypress_handler(int keycode, t_vars *vars)
+void	update_player_position(int keycode, t_vars *vars, t_point *pos)
 {
-	int	new_x;
-	int	new_y;
-
-	new_x = vars->pos.x;
-	new_y = vars->pos.y;
+	vars->direction = 0;
 	if (keycode == XK_Escape)
 		ft_free(vars, 0);
 	if (keycode == XK_w || keycode == XK_Up)
-		new_y -= SPEED;
+		pos->y -= SPEED;
 	if (keycode == XK_a || keycode == XK_Left)
-		new_x -= SPEED;
+	{
+		pos->x -= SPEED;
+		vars->direction = 1;
+	}
 	if (keycode == XK_s || keycode == XK_Down)
-		new_y += SPEED;
+		pos->y += SPEED;
 	if (keycode == XK_d || keycode == XK_Right)
-		new_x += SPEED;
-	if (check_wall_collision(vars, new_x, new_y))
+		pos->x += SPEED;
+}
+
+int	keypress_handler(int keycode, t_vars *vars)
+{
+	t_point new_position;
+
+	new_position.x = vars->pos.x;
+	new_position.y = vars->pos.y;
+	update_player_position(keycode, vars, &new_position);
+	if (check_wall_collision(vars, new_position.x, new_position.y))
 		return (0);
-	display_count(keycode, vars, new_x, new_y);
-	vars->pos.x = new_x;
-	vars->pos.y = new_y;
+	display_count(keycode, vars, new_position.x, new_position.y);
+	vars->pos.x = new_position.x;
+	vars->pos.y = new_position.y;
 	game_won(vars);
 	return (0);
 }

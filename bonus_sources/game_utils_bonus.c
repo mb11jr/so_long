@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:19:12 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/26 12:32:20 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/26 14:45:26 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	load_images(t_vars *vars)
 {
 	vars->background = add_image(vars, BACKGROUND);
 	vars->wall = add_image(vars, WALL);
-	vars->player = add_image(vars, PLAYER);
+	vars->player_right = add_image(vars, PLAYER_TO_RIGHT);
+	vars->player_left = add_image(vars, PLAYER_TO_LEFT);
 	vars->collectible = add_image(vars, COLLECTIBLE);
 	vars->exit = add_image(vars, EXIT);
 	vars->open_door = add_image(vars, OPEN_DOOR);
