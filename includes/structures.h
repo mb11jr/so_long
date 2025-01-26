@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 09:57:13 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/25 12:09:10 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/26 11:25:43 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,14 @@ typedef struct s_point
 	int		x;
 	int		y;
 }			t_point;
+
+typedef struct s_shape
+{
+	int x;
+	int y;
+	int w;
+	int h;
+}			t_shape;
 
 typedef struct s_vars
 {

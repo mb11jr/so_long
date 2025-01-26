@@ -5,11 +5,15 @@ CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3
 HEADERS = $(addprefix includes/, so_long.h structures.h)
 INCLUDES =  -Iincludes -I/usr/local/include
 MLX_FLAGS = -L/usr/local/lib -lmlx_Linux -lXext -lX11 -lm -lz
-SRC = $(addprefix sources/, so_long.c game_utils.c draw.c free.c\
-		read_map.c map_parser.c map_parser_utils.c image_utils.c)
+_SRC = so_long.c game_utils.c draw.c \
+	free.c read_map.c map_parser.c map_parser_utils.c \
+	image_utils.c check_utils.c
+_BONUS_SRC = so_long_bonus.c game_utils_bonus.c draw_bonus.c \
+			free_bonus.c read_map_bonus.c map_parser_bonus.c map_parser_utils_bonus.c \
+			image_utils_bonus.c image_utils2_bonus.c check_utils_bonus.c
+SRC = $(addprefix sources/, $(_SRC))
 OBJ = $(SRC:.c=.o)
-BONUS_SRC = $(addprefix bonus_sources/, so_long_bonus.c map_utils_bonus.c game_utils_bonus.c draw_bonus.c free_bonus.c \
-			read_map_bonus.c map_parser_bonus.c map_parser_utils_bonus.c image_utils_bonus.c image_utils2_bonus.c)
+BONUS_SRC = $(addprefix bonus_sources/, $(_BONUS_SRC))
 BONUS_OBJ = $(BONUS_SRC:.c=.o)
 
 all : game $(NAME)

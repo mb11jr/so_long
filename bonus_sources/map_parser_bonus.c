@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 12:11:32 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/25 11:31:21 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/26 10:30:39 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	map_parser(t_vars *vars)
 		free_and_exit(vars, 3, "The map is not enclosed in walls!");
 	if (!check_exit_start(vars))
 		free_and_exit(vars, 3,
-			"The map doesn't contain exactly one player and one exit!");
+			"The map must contain exactly one player and one exit!");
 	if (vars->total_collectibles < 1)
 		free_and_exit(vars, 3, "The map must have at least one collectible!");
 	if (!check_path(vars))

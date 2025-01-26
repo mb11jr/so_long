@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 14:30:52 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/25 11:49:35 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/26 12:22:40 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,12 @@
 # include <unistd.h>
 
 # define TILE_SIZE 48
-# define SPEED 24
+# define PADDING 8
+# define SPEED 12
 # define TILE_SCALE 2
 # define BACKGROUND "./textures/Background/Background01.xpm"
 # define WALL "./textures/Background/Wall.xpm"
-# define PLAYER "./textures/Player/shroom.xpm"
+# define PLAYER "./textures/Player/player_to_right.xpm"
 # define COLLECTIBLE "./textures/Collectibles/fruit.xpm"
 # define EXIT "./textures/Exit/closed_door.xpm"
 # define OPEN_DOOR "./textures/Exit/open_door.xpm"
@@ -76,7 +77,7 @@ void			display_count(int keycode, t_vars *vars, int x, int y);
 int				keypress_handler(int keycode, t_vars *vars);
 int				close_handler(t_vars *vars);
 void			load_images(t_vars *vars);
-int				do_overlap(int ax, int ay, int bx, int by);
+int				check_overlap(t_shape a, t_shape b);
 int				check_wall_collision(t_vars *vars, int x, int y);
 void			game_won(t_vars *vars);
 

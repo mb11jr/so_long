@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:19:12 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/25 12:32:52 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/26 12:32:20 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,42 +31,6 @@ void	load_count_images(t_vars *vars)
 	i = -1;
 	while (++i < 10)
 		vars->count[i] = add_image(vars, (char *)paths[i]);
-}
-
-int	do_overlap(int ax, int ay, int bx, int by)
-{
-	if (ax + TILE_SIZE <= bx || ax >= bx + TILE_SIZE)
-		return (0);
-	if (ay + TILE_SIZE <= by || ay >= by + TILE_SIZE)
-		return (0);
-	return (1);
-}
-
-int	check_wall_collision(t_vars *vars, int x, int y)
-{
-	int	i;
-	int	j;
-
-	j = -1;
-	while (vars->map[++j])
-	{
-		i = -1;
-		while (vars->map[j][++i])
-		{
-			if (!do_overlap(x, y, i * TILE_SIZE, j * TILE_SIZE))
-				continue ;
-			if (vars->map[j][i] == '1' || (vars->map[j][i] == 'E'
-					&& vars->collected < vars->total_collectibles))
-				return (1);
-			if (vars->map[j][i] == 'C')
-			{
-				++vars->collected;
-				vars->map[j][i] = '0';
-				return (0);
-			}
-		}
-	}
-	return (0);
 }
 
 void	game_won(t_vars *vars)
