@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 10:34:42 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/27 11:36:16 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/27 14:48:41 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	ft_free(t_vars *vars, int status)
 
 void	free_and_exit(t_vars *vars, int status, char *s)
 {
-	ft_printf("Error!\n");
-	ft_printf("%s\n", s);
+	ft_printf("\033[1;31mError!\n\033[0m");
+	ft_printf("\033[1m%s\033[0m\n", s);
 	ft_free(vars, status);
 }

@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:58:04 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/27 11:57:19 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/27 15:04:28 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ void	display_count(int keycode, t_vars *vars, int x, int y)
 void	update_player_position(int keycode, t_vars *vars, t_point *pos)
 {
 	if (keycode == XK_Escape)
+	{
+		ft_printf("\033[1;33m\nYou can always come back!\n\033[0m");
 		ft_free(vars, 0);
+	}
 	if (keycode == XK_w || keycode == XK_Up)
 		pos->y -= SPEED;
 	if (keycode == XK_a || keycode == XK_Left)
@@ -59,6 +62,7 @@ int	keypress_handler(int keycode, t_vars *vars)
 
 int	close_handler(t_vars *vars)
 {
+	ft_printf("\033[1;33m\nYou can always come back!\n\033[0m");
 	ft_free(vars, 0);
 	return (0);
 }

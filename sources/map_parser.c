@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 12:11:32 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/27 13:45:59 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/27 15:08:04 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,11 @@ static int	check_path(t_vars *vars)
 
 void	map_parser(t_vars *vars)
 {
+	if (!is_rectangular(vars))
+		free_and_exit(vars, 3, "The map is not rectangular!");
 	if (!validate_map(vars))
 		free_and_exit(vars, 3,
 			"The map is invalid! There are unrecognizable characters.");
-	if (!is_rectangular(vars))
-		free_and_exit(vars, 3, "The map is not rectangular!");
 	if (!enclosed_in_walls(vars))
 		free_and_exit(vars, 3, "The map is not enclosed in walls!");
 	if (!check_exit_start(vars))

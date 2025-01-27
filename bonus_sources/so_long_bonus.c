@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 09:53:36 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/27 10:56:57 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/27 15:06:29 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int ac, char **av)
 	t_vars	vars;
 
 	if (ac <= 1)
-		error_msg("No map specified.");
+		error_msg("No map specified!");
 	if (ac > 2)
 		error_msg("Too many arguments!");
 	if (ac == 2 && !check_map_extension(av[1]))

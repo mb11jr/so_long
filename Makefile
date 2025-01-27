@@ -1,4 +1,5 @@
 NAME = so_long
+BONUS = bonus
 CC = cc
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3
@@ -16,12 +17,16 @@ OBJ = $(SRC:.c=.o)
 BONUS_SRC = $(addprefix bonus_sources/, $(_BONUS_SRC))
 BONUS_OBJ = $(BONUS_SRC:.c=.o)
 
-all : game $(NAME)
+all : $(NAME)
+
+bonus : $(BONUS)
 
 %.o: %.c $(HEADERS)
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(NAME) : $(OBJ)
+	@echo "█▀ █▀█ █░░ █▀█ █▄░█ █▀▀"
+	@echo "▄█ █▄█ █▄▄ █▄█ █░▀█ █▄█"
 	@echo "Compiling source files...⏳"
 	@echo "Done ✅"
 	@echo "Compiling ft_printf, libft, and GNL source files...⏳"
@@ -32,7 +37,9 @@ $(NAME) : $(OBJ)
 	@$(CC) $(CFLAGS) $(OBJ) ./get_next_line/gnl.a ./ft_printf/libftprintf.a $(MLX_FLAGS) -o $(NAME)
 	@echo "Your $(NAME) game 🕹️  is ready"
 
-bonus : game $(BONUS_OBJ)
+$(BONUS) : $(BONUS_OBJ)
+	@echo "█▀ █▀█ █░░ █▀█ █▄░█ █▀▀"
+	@echo "▄█ █▄█ █▄▄ █▄█ █░▀█ █▄█"
 	@echo "Compiling source files...⏳"
 	@echo "Done ✅"
 	@echo "Compiling ft_printf, libft, and GNL source files...⏳"
@@ -40,7 +47,7 @@ bonus : game $(BONUS_OBJ)
 	@make -C get_next_line
 	@echo "Done ✅"
 	@echo "Linking...⏳"
-	@$(CC) $(CFLAGS) $(BONUS_OBJ) ./get_next_line/gnl.a ./ft_printf/libftprintf.a $(MLX_FLAGS) -o $(NAME)
+	$(CC) $(CFLAGS) $(BONUS_OBJ) ./get_next_line/gnl.a ./ft_printf/libftprintf.a $(MLX_FLAGS) -o $(BONUS)
 	@echo "Your $(NAME) game 🕹️  is ready"
 
 clean:
@@ -53,15 +60,11 @@ clean:
 
 fclean : clean
 	@echo "Full clean begins... 🚮"
-	@$(RM) $(NAME)
+	@$(RM) $(NAME) $(BONUS)
 	@make -C ft_printf fclean
 	@make -C get_next_line fclean
 	@echo "Full clean is done ✅"
 
 re : fclean all
-
-game : 
-	@echo "█▀ █▀█ █░░ █▀█ █▄░█ █▀▀"
-	@echo "▄█ █▄█ █▄▄ █▄█ █░▀█ █▄█"
 
 .PHONY: all clean fclean re
