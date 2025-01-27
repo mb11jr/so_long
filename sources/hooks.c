@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:58:04 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/27 15:28:57 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/27 18:27:14 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int	keypress_handler(int keycode, t_vars *vars)
 	display_count(keycode, vars, new_position.x, new_position.y);
 	vars->pos.x = new_position.x;
 	vars->pos.y = new_position.y;
-	game_won(vars);
 	return (0);
 }
 

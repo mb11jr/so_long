@@ -6,13 +6,13 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 12:31:46 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/27 12:22:41 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/27 18:24:33 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static int	check_overlap(t_shape a, t_shape b)
+int	check_overlap(t_shape a, t_shape b)
 {
 	if (a.x + a.w <= b.x || a.x >= b.x + b.w)
 		return (0);
@@ -23,17 +23,21 @@ static int	check_overlap(t_shape a, t_shape b)
 
 static void	init_shape(t_vars *vars, t_shape *shape, t_point pos)
 {
-	if (vars->map[pos.y][pos.x] == '1' || vars->map[pos.y][pos.x] == 'E')
+	if (vars->map[pos.y][pos.x] == '1')
 		*shape = (t_shape){pos.x * TILE_SIZE, pos.y * TILE_SIZE, TILE_SIZE,
 			TILE_SIZE};
 	if (vars->map[pos.y][pos.x] == 'C')
-		*shape = (t_shape){pos.x * vars->collectible->width * 3 + 3, pos.y
-			* vars->collectible->height * 3 + 3, vars->collectible->width * 3
-			- 3 - 3, vars->collectible->height * 3 - 3 - 3};
+		*shape = (t_shape){pos.x * TILE_SIZE + 3, pos.y
+			* TILE_SIZE + 3, TILE_SIZE
+			- 3 - 3, TILE_SIZE - 3 - 3};
+	if (vars->map[pos.y][pos.x] == 'E')
+		*shape = (t_shape){pos.x * TILE_SIZE + 3, pos.y
+			* TILE_SIZE, TILE_SIZE
+			- 3 - 4, TILE_SIZE};
 	if (vars->map[pos.y][pos.x] == 'N')
-		*shape = (t_shape){pos.x * vars->enemy->width * 2 + 5, pos.y
-			* vars->enemy->height * 2 + 5, vars->enemy->width * 2 - 5 - 5,
-			vars->enemy->height * 2 - 5 - 6};
+		*shape = (t_shape){pos.x * TILE_SIZE + 5, pos.y
+			* TILE_SIZE + 5, TILE_SIZE - 5 - 5,
+			TILE_SIZE - 5 - 6};
 }
 
 static void	check_tile(t_vars *vars, t_point pos)
@@ -47,6 +51,12 @@ static void	check_tile(t_vars *vars, t_point pos)
 	{
 		ft_printf("\033[1;31m\nGAME OVER!\033[0m\n");
 		ft_free(vars, 4);
+	}
+	if (vars->map[pos.y][pos.x] == 'E' && vars->collected == vars->total_collectibles)
+	{
+		ft_printf("\033[1;32m\nCongratulations! YOU HAVE WON!\n\033[0m");
+		vars->moves++;
+		ft_free(vars, 0);
 	}
 }
 

@@ -6,11 +6,29 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:19:12 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/27 12:20:31 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/27 18:11:51 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int	render_game(t_vars *vars)
+{
+	if (vars->base_image)
+		mlx_destroy_image(vars->mlx, vars->base_image->img);
+	free(vars->base_image);
+	vars->base_image = malloc(sizeof(t_obj));
+	vars->base_image->img = mlx_new_image(vars->mlx, vars->win_width
+			* TILE_SCALE, vars->win_height * TILE_SCALE);
+	vars->base_image->addr = mlx_get_data_addr(vars->base_image->img,
+			&vars->base_image->bits_per_pixel, &vars->base_image->line_length,
+			&vars->base_image->endian);
+	draw(vars);
+	draw_count(vars);
+	mlx_clear_window(vars->mlx, vars->win);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->base_image->img, 0, 0);
+	return (0);
+}
 
 t_obj	*add_image(t_vars *vars, char *filename)
 {
@@ -50,36 +68,4 @@ void	load_count_images(t_vars *vars)
 	i = -1;
 	while (++i < 10)
 		vars->count[i] = add_image(vars, (char *)paths[i]);
-}
-
-void	game_won(t_vars *vars)
-{
-	if (vars->map[vars->pos.y / TILE_SIZE][vars->pos.x / TILE_SIZE] == 'E'
-		&& vars->collected == vars->total_collectibles)
-	{
-		ft_printf("\033[1;32m\nCongratulations! YOU HAVE WON!\n\033[0m");
-		ft_free(vars, 0);
-	}
-}
-
-void	get_player_position(t_vars *vars)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (vars->map[y])
-	{
-		x = 0;
-		while (vars->map[y][x])
-		{
-			if (vars->map[y][x] == 'P')
-			{
-				vars->pos.x = x * TILE_SIZE;
-				vars->pos.y = y * TILE_SIZE;
-			}
-			x++;
-		}
-		y++;
-	}
 }

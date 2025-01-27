@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:19:12 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/27 12:20:29 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/27 18:07:00 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,23 @@ int	render_game(t_vars *vars)
 	return (0);
 }
 
+t_obj	*add_image(t_vars *vars, char *filename)
+{
+	t_obj	*img;
+
+	img = malloc(sizeof(t_obj));
+	img->img = mlx_xpm_file_to_image(vars->mlx, filename, &img->width,
+			&img->height);
+	if (!img->img)
+	{
+		ft_printf("The file [%s] doesn't exist!", filename);
+		ft_free(vars, 2);
+	}
+	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,
+			&img->line_length, &img->endian);
+	return (img);
+}
+
 void	load_images(t_vars *vars)
 {
 	vars->background = add_image(vars, BACKGROUND);
@@ -38,14 +55,4 @@ void	load_images(t_vars *vars)
 	vars->collectible = add_image(vars, COLLECTIBLE);
 	vars->exit = add_image(vars, EXIT);
 	vars->open_door = add_image(vars, OPEN_DOOR);
-}
-
-void	game_won(t_vars *vars)
-{
-	if (vars->map[vars->pos.y / TILE_SIZE][vars->pos.x / TILE_SIZE] == 'E'
-		&& vars->collected == vars->total_collectibles)
-	{
-		ft_printf("\033[1;32m\nCongratulations! YOU HAVE WON!\n\033[0m");
-		ft_free(vars, 0);
-	}
 }

@@ -19,8 +19,6 @@ BONUS_OBJ = $(BONUS_SRC:.c=.o)
 
 all : $(NAME)
 
-bonus : $(BONUS)
-
 %.o: %.c $(HEADERS)
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
@@ -35,11 +33,12 @@ $(NAME) : $(OBJ)
 	@echo "Done ✅"
 	@echo "Linking...⏳"
 	@$(CC) $(CFLAGS) $(OBJ) ./get_next_line/gnl.a ./ft_printf/libftprintf.a $(MLX_FLAGS) -o $(NAME)
-	@echo "Your $(NAME) game 🕹️  is ready"
+	@echo "Your game 🕹️ is ready"
 
 $(BONUS) : $(BONUS_OBJ)
 	@echo "█▀ █▀█ █░░ █▀█ █▄░█ █▀▀"
 	@echo "▄█ █▄█ █▄▄ █▄█ █░▀█ █▄█"
+	@touch $(BONUS)
 	@echo "Compiling source files...⏳"
 	@echo "Done ✅"
 	@echo "Compiling ft_printf, libft, and GNL source files...⏳"
@@ -47,8 +46,8 @@ $(BONUS) : $(BONUS_OBJ)
 	@make -C get_next_line
 	@echo "Done ✅"
 	@echo "Linking...⏳"
-	$(CC) $(CFLAGS) $(BONUS_OBJ) ./get_next_line/gnl.a ./ft_printf/libftprintf.a $(MLX_FLAGS) -o $(BONUS)
-	@echo "Your $(NAME) game 🕹️  is ready"
+	$(CC) $(CFLAGS) $(BONUS_OBJ) ./get_next_line/gnl.a ./ft_printf/libftprintf.a $(MLX_FLAGS) -o $(NAME)
+	@echo "Your game 🕹️ is ready"
 
 clean:
 	@echo "Cleaning object files...🚮"

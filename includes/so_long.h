@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 14:30:52 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/27 15:28:40 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/27 18:18:03 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@
 # define PADDING 8
 # define SPEED 12
 # define TILE_SCALE 2
-# define BACKGROUND "./textures/Background/Background01.xpm"
-# define WALL "./textures/Background/Wall.xpm"
-# define PLAYER_TO_RIGHT "./textures/Player/player_to_right.xpm"
-# define PLAYER_TO_LEFT "./textures/Player/player_to_left.xpm"
-# define ENEMY  "./textures/Enemy/enemy.xpm"
-# define COLLECTIBLE "./textures/Collectibles/coin.xpm"
-# define EXIT "./textures/Exit/closed_door.xpm"
-# define OPEN_DOOR "./textures/Exit/open_door.xpm"
+# define BACKGROUND "./textures/background/background.xpm"
+# define WALL "./textures/background/wall.xpm"
+# define PLAYER_TO_RIGHT "./textures/player/player_to_right.xpm"
+# define PLAYER_TO_LEFT "./textures/player/player_to_left.xpm"
+# define ENEMY  "./textures/enemy/enemy.xpm"
+# define COLLECTIBLE "./textures/collectibles/coin.xpm"
+# define EXIT "./textures/exit/closed_door.xpm"
+# define OPEN_DOOR "./textures/exit/open_door.xpm"
 # define ZERO "./textures/numbers/0.xpm"
 # define ONE "./textures/numbers/1.xpm"
 # define TWO "./textures/numbers/2.xpm"
@@ -71,6 +71,7 @@ int				keypress_handler(int keycode, t_vars *vars);
 int				close_handler(t_vars *vars);
 void			load_images(t_vars *vars);
 int				check_collision(t_vars *vars, int x, int y);
+int				check_overlap(t_shape a, t_shape b);
 void			game_won(t_vars *vars);
 
 #endif
