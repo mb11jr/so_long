@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 09:53:36 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/26 15:07:10 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/26 15:52:39 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	display_count(int keycode, t_vars *vars, int x, int y)
 
 void	update_player_position(int keycode, t_vars *vars, t_point *pos)
 {
-	vars->direction = 0;
 	if (keycode == XK_Escape)
 		ft_free(vars, 0);
 	if (keycode == XK_w || keycode == XK_Up)
@@ -36,7 +35,10 @@ void	update_player_position(int keycode, t_vars *vars, t_point *pos)
 	if (keycode == XK_s || keycode == XK_Down)
 		pos->y += SPEED;
 	if (keycode == XK_d || keycode == XK_Right)
+	{
 		pos->x += SPEED;
+		vars->direction = 0;
+	}
 }
 
 int	keypress_handler(int keycode, t_vars *vars)

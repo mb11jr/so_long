@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 14:30:52 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/26 15:10:22 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/26 16:38:40 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define WALL "./textures/Background/Wall.xpm"
 # define PLAYER_TO_RIGHT "./textures/Player/player_to_right.xpm"
 # define PLAYER_TO_LEFT "./textures/Player/player_to_left.xpm"
+# define ENEMY  "./textures/Enemy/enemy.xpm"
 # define COLLECTIBLE "./textures/Collectibles/fruit.xpm"
 # define EXIT "./textures/Exit/closed_door.xpm"
 # define OPEN_DOOR "./textures/Exit/open_door.xpm"

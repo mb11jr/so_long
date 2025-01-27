@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 09:57:13 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/26 14:40:36 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/26 15:54:33 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_vars
 	t_obj	*player_right;
 	t_obj	*player_left;
 	t_point pos;
+	t_obj	*enemy;
 	t_obj	*collectible;
 	t_obj	*exit;
 	t_obj	*open_door;

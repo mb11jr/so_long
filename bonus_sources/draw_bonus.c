@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 17:44:20 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/26 15:11:11 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/26 16:37:27 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@ int	draw(t_vars *vars)
 					* TILE_SIZE);
 			if (vars->map[y][x] == 'E')
 				draw_exit(vars, x, y);
+			if (vars->map[y][x] == 'N')
+				// put_img_to_baseimage(vars, vars->enemy, x * TILE_SIZE, y * TILE_SIZE);
+				put_scaledimg_to_baseimage(vars, vars->enemy, (t_point){x * vars->enemy->width, y * vars->enemy->height}, (t_point){2 * TILE_SCALE, 2 * TILE_SCALE});
 			x++;
 		}
 		y++;
