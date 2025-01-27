@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 12:11:32 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/27 11:50:50 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/27 13:46:21 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,8 @@ void	map_parser(t_vars *vars)
 	if (!check_path(vars))
 		free_and_exit(vars, 3,
 			"No valid path in the map: the player can't reach the exit.");
-	if (vars->win_width > 1920)
+	if (vars->win_width / TILE_SIZE > 20)
 		free_and_exit(vars, 3, "The map exceeds the maximum window width!");
-	if (vars->win_height > 1080)
+	if (vars->win_height / TILE_SIZE > 10)
 		free_and_exit(vars, 3, "The map exceeds the maximum window height!");
 }
