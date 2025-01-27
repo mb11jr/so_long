@@ -1,49 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_bonus.c                                      :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/27 10:55:35 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/27 14:55:23 by mbentale         ###   ########.fr       */
+/*   Created: 2025/01/27 10:58:04 by mbentale          #+#    #+#             */
+/*   Updated: 2025/01/27 15:28:57 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	render_game(t_vars *vars)
-{
-	if (vars->base_image)
-		mlx_destroy_image(vars->mlx, vars->base_image->img);
-	free(vars->base_image);
-	vars->base_image = malloc(sizeof(t_obj));
-	vars->base_image->img = mlx_new_image(vars->mlx, vars->win_width
-			* TILE_SCALE, vars->win_height * TILE_SCALE);
-	vars->base_image->addr = mlx_get_data_addr(vars->base_image->img,
-			&vars->base_image->bits_per_pixel, &vars->base_image->line_length,
-			&vars->base_image->endian);
-	draw(vars);
-	draw_count(vars);
-	mlx_clear_window(vars->mlx, vars->win);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->base_image->img, 0, 0);
-	return (0);
-}
-
-void	display_count(int keycode, t_vars *vars, int x, int y)
+static void	display_count(int keycode, t_vars *vars, int x, int y)
 {
 	if (!check_collision(vars, x, y) && (keycode == XK_w
 			|| keycode == XK_Up || keycode == XK_a || keycode == XK_Left
 			|| keycode == XK_s || keycode == XK_Down || keycode == XK_d
 			|| keycode == XK_Right))
-		++vars->moves;
+		ft_printf("\r\033[KTotal moves: %d", ++vars->moves);
 }
 
-void	update_player_position(int keycode, t_vars *vars, t_point *pos)
+static void	update_player_position(int keycode, t_vars *vars, t_point *pos)
 {
 	if (keycode == XK_Escape)
 	{
-		ft_printf("\033[1;33mYou can always come back!\n\033[0m");
+		ft_printf("\033[1;33m\nYou can always come back!\n\033[0m");
 		ft_free(vars, 0);
 	}
 	if (keycode == XK_w || keycode == XK_Up)
@@ -80,7 +62,7 @@ int	keypress_handler(int keycode, t_vars *vars)
 
 int	close_handler(t_vars *vars)
 {
-	ft_printf("\033[1;33mYou can always come back!\n\033[0m");
+	ft_printf("\033[1;33m\nYou can always come back!\n\033[0m");
 	ft_free(vars, 0);
 	return (0);
 }

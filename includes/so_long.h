@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 14:30:52 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/27 11:57:19 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/27 15:28:40 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ int				check_map_extension(char *s);
 int				ft_linelen(char *s);
 void			error_msg(char *s);
 void			read_map(t_vars *vars, char *path);
-void			display_count(int keycode, t_vars *vars, int x, int y);
-void			update_player_position(int keycode, t_vars *vars, t_point *pos);
 int				keypress_handler(int keycode, t_vars *vars);
 int				close_handler(t_vars *vars);
 void			load_images(t_vars *vars);
