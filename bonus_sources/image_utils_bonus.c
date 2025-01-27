@@ -1,32 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   images_utils2_bonus.c                              :+:      :+:    :+:   */
+/*   image_utils_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 21:31:36 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/24 21:43:55 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/27 11:45:15 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-t_obj	*add_image(t_vars *vars, char *filename)
+static void	put_pixel_img(t_vars *vars, int x, int y, int color)
 {
-	t_obj	*img;
+	char	*pxl;
 
-	img = malloc(sizeof(t_obj));
-	img->img = mlx_xpm_file_to_image(vars->mlx, filename, &img->width,
-			&img->height);
-	if (!img->img)
+	if (color == (int)0xFF000000)
+		return ;
+	if (x >= 0 && x < vars->win_width * TILE_SCALE && y >= 0
+		&& y < vars->win_height * TILE_SCALE)
 	{
-		ft_printf("The file %s doesn't exist!", filename);
-		ft_free(vars, 2);
+		pxl = vars->base_image->addr + (y * vars->base_image->line_length + x
+				* vars->base_image->bits_per_pixel / 8);
+		*(unsigned int *)pxl = color;
 	}
-	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,
-			&img->line_length, &img->endian);
-	return (img);
+}
+
+static unsigned int	get_pixel_img(t_obj *img, int x, int y)
+{
+	return (*(unsigned int *)(img->addr + y * img->line_length + x
+		* img->bits_per_pixel / 8));
 }
 
 void	put_img_to_baseimage(t_vars *vars, t_obj *src, int x, int y)

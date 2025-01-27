@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:36:31 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/25 12:31:55 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/27 11:18:53 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,32 @@ void	put_img_to_baseimage(t_vars *vars, t_obj *src, int x, int y)
 				while (++l < TILE_SCALE)
 					put_pixel_img(vars, (i + x) * TILE_SCALE + l, (j + y)
 						* TILE_SCALE + k, get_pixel_img(src, i, j));
+			}
+		}
+	}
+}
+
+void	put_scaledimg_to_baseimage(t_vars *vars, t_obj *src, t_point pos,
+		t_point scale)
+{
+	int	i;
+	int	j;
+	int	k;
+	int	l;
+
+	i = -1;
+	while (++i < src->width)
+	{
+		j = -1;
+		while (++j < src->height)
+		{
+			k = -1;
+			while (++k < scale.y)
+			{
+				l = -1;
+				while (++l < scale.x)
+					put_pixel_img(vars, (pos.x + i) * scale.x + l, (pos.y + j)
+						* scale.y + k, get_pixel_img(src, i, j));
 			}
 		}
 	}

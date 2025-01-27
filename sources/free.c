@@ -6,24 +6,20 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 10:35:05 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/26 14:41:02 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/27 11:43:13 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	ft_destroy_image(t_vars *vars, t_obj *obj)
+static void	ft_destroy_image(t_vars *vars, t_obj *obj)
 {
 	mlx_destroy_image(vars->mlx, obj->img);
 	free(obj);
 }
 
-void	ft_free(t_vars *vars, int status)
+static void	free_tiles(t_vars *vars)
 {
-	if (vars->map)
-		free_map(vars->map, vars->win_height / TILE_SIZE);
-	if (!vars->mlx)
-		exit(status);
 	if (vars->base_image)
 		ft_destroy_image(vars, vars->base_image);
 	if (vars->background)
@@ -40,10 +36,20 @@ void	ft_free(t_vars *vars, int status)
 		ft_destroy_image(vars, vars->exit);
 	if (vars->open_door)
 		ft_destroy_image(vars, vars->open_door);
-	if (vars->win)
-		mlx_destroy_window(vars->mlx, vars->win);
-	mlx_destroy_display(vars->mlx);
-	free(vars->mlx);
+}
+
+void	ft_free(t_vars *vars, int status)
+{
+	if (vars->map)
+		free_map(vars->map, vars->win_height / TILE_SIZE);
+	if (vars->mlx)
+	{
+		free_tiles(vars);
+		if (vars->win)
+			mlx_destroy_window(vars->mlx, vars->win);
+		mlx_destroy_display(vars->mlx);
+		free(vars->mlx);
+	}
 	exit(status);
 }
 

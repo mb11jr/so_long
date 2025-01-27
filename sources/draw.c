@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 17:44:20 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/26 14:55:59 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/27 11:24:29 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,21 @@ void	draw_player(t_vars *vars)
 	if (vars->direction)
 		put_img_to_baseimage(vars, vars->player_left, vars->pos.x, vars->pos.y);
 	else
-		put_img_to_baseimage(vars, vars->player_right, vars->pos.x, vars->pos.y);
+		put_img_to_baseimage(vars, vars->player_right, vars->pos.x,
+			vars->pos.y);
+}
+
+void	draw_each(t_vars *vars, t_point pos)
+{
+	if (vars->map[pos.x][pos.y] == '1')
+		put_img_to_baseimage(vars, vars->wall, pos.y * TILE_SIZE, pos.x
+			* TILE_SIZE);
+	if (vars->map[pos.x][pos.y] == 'E')
+		draw_exit(vars, pos.y, pos.x);
+	if (vars->map[pos.x][pos.y] == 'C')
+		put_scaledimg_to_baseimage(vars, vars->collectible, (t_point){pos.y
+			* vars->collectible->width, pos.x * vars->collectible->height},
+			(t_point){6, 6});
 }
 
 int	draw(t_vars *vars)
@@ -42,33 +56,9 @@ int	draw(t_vars *vars)
 		{
 			put_img_to_baseimage(vars, vars->background, x * TILE_SIZE, y
 				* TILE_SIZE);
-			if (vars->map[y][x] == '1')
-				put_img_to_baseimage(vars, vars->wall, x * TILE_SIZE, y
-					* TILE_SIZE);
-			if (vars->map[y][x] == 'C')
-				put_img_to_baseimage(vars, vars->collectible, x * TILE_SIZE, y
-					* TILE_SIZE);
-			if (vars->map[y][x] == 'E')
-				draw_exit(vars, x, y);
+			draw_each(vars, (t_point){y, x});
 		}
 	}
 	draw_player(vars);
-	return (0);
-}
-
-int	render_game(t_vars *vars)
-{
-	if (vars->base_image)
-		mlx_destroy_image(vars->mlx, vars->base_image->img);
-	free(vars->base_image);
-	vars->base_image = malloc(sizeof(t_obj));
-	vars->base_image->img = mlx_new_image(vars->mlx, vars->win_width
-			* TILE_SCALE, vars->win_height * TILE_SCALE);
-	vars->base_image->addr = mlx_get_data_addr(vars->base_image->img,
-			&vars->base_image->bits_per_pixel, &vars->base_image->line_length,
-			&vars->base_image->endian);
-	draw(vars);
-	mlx_clear_window(vars->mlx, vars->win);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->base_image->img, 0, 0);
 	return (0);
 }

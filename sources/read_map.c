@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 14:34:15 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/25 12:13:48 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/27 11:52:01 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	error_msg(char *s)
 	exit(3);
 }
 
-int	map_height(t_vars *vars, int fd)
+static int	map_height(t_vars *vars, int fd)
 {
 	char	*line;
 	int		rows;

@@ -6,13 +6,13 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 12:11:32 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/26 10:30:39 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/27 11:50:50 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	flood_fill(t_vars *vars, char **map, int x, int y)
+static void	flood_fill(t_vars *vars, char **map, int x, int y)
 {
 	int	height;
 	int	width;
@@ -24,9 +24,10 @@ void	flood_fill(t_vars *vars, char **map, int x, int y)
 		return ;
 	if (map[y][x] == 'C')
 		vars->reachable_collectibles++;
-	if (map[y][x] == 'E')
+	if (map[y][x] == 'E' || map[y][x] == 'N')
 	{
-		vars->reachable_exit++;
+		if (map[y][x] == 'E')
+			vars->reachable_exit++;
 		map[y][x] = '1';
 		return ;
 	}
@@ -37,7 +38,7 @@ void	flood_fill(t_vars *vars, char **map, int x, int y)
 	flood_fill(vars, map, x, y - 1);
 }
 
-char	**clone_map(char **original, int height, int width)
+static char	**clone_map(char **original, int height, int width)
 {
 	char	**clone;
 	int		i;
@@ -75,7 +76,7 @@ void	free_map(char **map, int height)
 	free(map);
 }
 
-int	check_path(t_vars *vars)
+static int	check_path(t_vars *vars)
 {
 	char	**map;
 

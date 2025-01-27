@@ -6,13 +6,13 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 12:31:46 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/26 12:32:38 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/27 11:57:19 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	check_overlap(t_shape a, t_shape b)
+static int	check_overlap(t_shape a, t_shape b)
 {
 	if (a.x + a.w <= b.x || a.x >= b.x + b.w)
 		return (0);
@@ -21,26 +21,36 @@ int	check_overlap(t_shape a, t_shape b)
 	return (1);
 }
 
-void	init_shape(t_vars *vars, t_shape *shape, t_point pos)
+static void	init_shape(t_vars *vars, t_shape *shape, t_point pos)
 {
 	if (vars->map[pos.y][pos.x] == '1' || vars->map[pos.y][pos.x] == 'E')
 		*shape = (t_shape){pos.x * TILE_SIZE, pos.y * TILE_SIZE, TILE_SIZE,
 			TILE_SIZE};
 	if (vars->map[pos.y][pos.x] == 'C')
-		*shape = (t_shape){pos.x * TILE_SIZE + 7, pos.y * TILE_SIZE + 11,
-			TILE_SIZE - 7 - 7, TILE_SIZE - 11 - 11};
+		*shape = (t_shape){pos.x * vars->collectible->width * 3 + 3, pos.y
+			* vars->collectible->height * 3 + 3, vars->collectible->width * 3
+			- 3 - 3, vars->collectible->height * 3 - 3 - 3};
+	if (vars->map[pos.y][pos.x] == 'N')
+		*shape = (t_shape){pos.x * vars->enemy->width * 2 + 5, pos.y
+			* vars->enemy->height * 2 + 5, vars->enemy->width * 2 - 5 - 5,
+			vars->enemy->height * 2 - 5 - 6};
 }
 
-void	check_collectible(t_vars *vars, t_point pos)
+static void	check_tile(t_vars *vars, t_point pos)
 {
 	if (vars->map[pos.y][pos.x] == 'C')
 	{
 		++vars->collected;
 		vars->map[pos.y][pos.x] = '0';
 	}
+	if (vars->map[pos.y][pos.x] == 'N')
+	{
+		ft_printf("GAME OVER!\n");
+		ft_free(vars, 4);
+	}
 }
 
-int	check_wall_collision(t_vars *vars, int x, int y)
+int	check_collision(t_vars *vars, int x, int y)
 {
 	int		i;
 	int		j;
@@ -60,7 +70,7 @@ int	check_wall_collision(t_vars *vars, int x, int y)
 			if (vars->map[j][i] == '1' || (vars->map[j][i] == 'E'
 					&& vars->collected < vars->total_collectibles))
 				return (1);
-			check_collectible(vars, (t_point){i, j});
+			check_tile(vars, (t_point){i, j});
 		}
 	}
 	return (0);

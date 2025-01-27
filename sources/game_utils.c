@@ -6,11 +6,28 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:19:12 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/26 14:37:16 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/27 11:54:02 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int	render_game(t_vars *vars)
+{
+	if (vars->base_image)
+		mlx_destroy_image(vars->mlx, vars->base_image->img);
+	free(vars->base_image);
+	vars->base_image = malloc(sizeof(t_obj));
+	vars->base_image->img = mlx_new_image(vars->mlx, vars->win_width
+			* TILE_SCALE, vars->win_height * TILE_SCALE);
+	vars->base_image->addr = mlx_get_data_addr(vars->base_image->img,
+			&vars->base_image->bits_per_pixel, &vars->base_image->line_length,
+			&vars->base_image->endian);
+	draw(vars);
+	mlx_clear_window(vars->mlx, vars->win);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->base_image->img, 0, 0);
+	return (0);
+}
 
 void	load_images(t_vars *vars)
 {
@@ -29,9 +46,9 @@ void	game_won(t_vars *vars)
 		&& vars->collected == vars->total_collectibles)
 	{
 		ft_printf("\n\nCongratulations! YOU HAVE WON!\n");
-		ft_printf("______________________________\n");
+		ft_printf("\n");
 		ft_printf("Is that the best you can do?\n");
-		ft_printf("______________________________\n");
+		ft_printf("\n");
 		ft_printf("Find a shorter path... :D");
 		ft_free(vars, 0);
 	}

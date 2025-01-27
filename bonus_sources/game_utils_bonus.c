@@ -6,11 +6,28 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:19:12 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/26 15:54:55 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/27 11:33:39 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+t_obj	*add_image(t_vars *vars, char *filename)
+{
+	t_obj	*img;
+
+	img = malloc(sizeof(t_obj));
+	img->img = mlx_xpm_file_to_image(vars->mlx, filename, &img->width,
+			&img->height);
+	if (!img->img)
+	{
+		ft_printf("The file %s doesn't exist!", filename);
+		ft_free(vars, 2);
+	}
+	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,
+			&img->line_length, &img->endian);
+	return (img);
+}
 
 void	load_images(t_vars *vars)
 {
@@ -40,11 +57,33 @@ void	game_won(t_vars *vars)
 	if (vars->map[vars->pos.y / TILE_SIZE][vars->pos.x / TILE_SIZE] == 'E'
 		&& vars->collected == vars->total_collectibles)
 	{
-		ft_printf("\n\nCongratulations! YOU HAVE WON!\n");
-		ft_printf("______________________________\n");
+		ft_printf("\nCongratulations! YOU HAVE WON!\n");
+		ft_printf("\n");
 		ft_printf("Is that the best you can do?\n");
-		ft_printf("______________________________\n");
+		ft_printf("\n");
 		ft_printf("Find a shorter path... :D");
 		ft_free(vars, 0);
+	}
+}
+
+void	get_player_position(t_vars *vars)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (vars->map[y])
+	{
+		x = 0;
+		while (vars->map[y][x])
+		{
+			if (vars->map[y][x] == 'P')
+			{
+				vars->pos.x = x * TILE_SIZE;
+				vars->pos.y = y * TILE_SIZE;
+			}
+			x++;
+		}
+		y++;
 	}
 }

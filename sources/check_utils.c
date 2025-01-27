@@ -6,13 +6,13 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 12:30:56 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/26 12:31:25 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/27 11:57:19 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	check_overlap(t_shape a, t_shape b)
+static int	check_overlap(t_shape a, t_shape b)
 {
 	if (a.x + a.w <= b.x || a.x >= b.x + b.w)
 		return (0);
@@ -21,7 +21,7 @@ int	check_overlap(t_shape a, t_shape b)
 	return (1);
 }
 
-void	init_shape(t_vars *vars, t_shape *shape, t_point pos)
+static void	init_shape(t_vars *vars, t_shape *shape, t_point pos)
 {
 	if (vars->map[pos.y][pos.x] == '1' || vars->map[pos.y][pos.x] == 'E')
 		*shape = (t_shape){pos.x * TILE_SIZE, pos.y * TILE_SIZE, TILE_SIZE,
@@ -31,7 +31,7 @@ void	init_shape(t_vars *vars, t_shape *shape, t_point pos)
 			TILE_SIZE - 7 - 7, TILE_SIZE - 11 - 11};
 }
 
-void	check_collectible(t_vars *vars, t_point pos)
+static void	check_collectible(t_vars *vars, t_point pos)
 {
 	if (vars->map[pos.y][pos.x] == 'C')
 	{
@@ -40,7 +40,7 @@ void	check_collectible(t_vars *vars, t_point pos)
 	}
 }
 
-int	check_wall_collision(t_vars *vars, int x, int y)
+int	check_collision(t_vars *vars, int x, int y)
 {
 	int		i;
 	int		j;
