@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 12:31:46 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/27 11:57:19 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/27 12:22:41 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	check_tile(t_vars *vars, t_point pos)
 	}
 	if (vars->map[pos.y][pos.x] == 'N')
 	{
-		ft_printf("GAME OVER!\n");
+		ft_printf("\033[1;31m\nGAME OVER!\033[0m\n");
 		ft_free(vars, 4);
 	}
 }
