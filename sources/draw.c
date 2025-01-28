@@ -6,13 +6,13 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 17:44:20 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/28 10:01:21 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/28 12:33:08 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	draw_exit(t_vars *vars, int x, int y)
+static void	draw_exit(t_vars *vars, int x, int y)
 {
 	if (vars->collected == vars->total_collectibles)
 		put_img_to_baseimage(vars, vars->open_door, x * TILE_SIZE, y
@@ -21,7 +21,7 @@ void	draw_exit(t_vars *vars, int x, int y)
 		put_img_to_baseimage(vars, vars->exit, x * TILE_SIZE, y * TILE_SIZE);
 }
 
-void	draw_player(t_vars *vars)
+static void	draw_player(t_vars *vars)
 {
 	if (vars->direction)
 		put_img_to_baseimage(vars, vars->player_left, vars->pos.x, vars->pos.y);
@@ -30,7 +30,7 @@ void	draw_player(t_vars *vars)
 			vars->pos.y);
 }
 
-void	draw_each(t_vars *vars, t_point pos)
+static void	draw_each(t_vars *vars, t_point pos)
 {
 	if (vars->map[pos.x][pos.y] == '1')
 		put_img_to_baseimage(vars, vars->wall, pos.y * TILE_SIZE, pos.x

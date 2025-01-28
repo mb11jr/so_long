@@ -32,10 +32,10 @@ typedef struct s_point
 
 typedef struct s_shape
 {
-	int x;
-	int y;
-	int w;
-	int h;
+	int		x;
+	int		y;
+	int		w;
+	int		h;
 }			t_shape;
 
 typedef struct s_vars
@@ -50,7 +50,7 @@ typedef struct s_vars
 	t_obj	*wall;
 	t_obj	*player_right;
 	t_obj	*player_left;
-	t_point pos;
+	t_point	pos;
 	t_obj	*enemy;
 	t_obj	*collectible;
 	t_obj	*exit;

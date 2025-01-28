@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 14:34:15 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/27 14:57:12 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/28 12:23:29 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	error_msg(char *s)
 {
 	ft_printf("\033[1;31mError!\n\033[0m");
 	ft_printf("\033[1m%s\n\033[0m", s);
-	exit(3);
+	exit(1);
 }
 
 static int	map_height(t_vars *vars, int fd)
@@ -48,7 +48,7 @@ void	read_map(t_vars *vars, char *path)
 
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
-		free_and_exit(vars, 3, "The map file doesn't exist!");
+		free_and_exit(vars, 2, "The map file doesn't exist!");
 	rows = map_height(vars, fd);
 	vars->map = malloc((rows + 1) * sizeof(char *));
 	fd = open(path, O_RDONLY);

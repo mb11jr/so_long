@@ -6,13 +6,13 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:55:35 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/27 18:11:45 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/28 12:06:59 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	display_count(int keycode, t_vars *vars, int x, int y)
+static void	update_count(int keycode, t_vars *vars, int x, int y)
 {
 	if (!check_collision(vars, x, y) && (keycode == XK_w
 			|| keycode == XK_Up || keycode == XK_a || keycode == XK_Left
@@ -53,7 +53,7 @@ int	keypress_handler(int keycode, t_vars *vars)
 	update_player_position(keycode, vars, &new_position);
 	if (check_collision(vars, new_position.x, new_position.y))
 		return (0);
-	display_count(keycode, vars, new_position.x, new_position.y);
+	update_count(keycode, vars, new_position.x, new_position.y);
 	vars->pos.x = new_position.x;
 	vars->pos.y = new_position.y;
 	return (0);

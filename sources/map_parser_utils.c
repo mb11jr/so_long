@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:05:32 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/25 12:13:55 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/28 11:05:38 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	validate_map(t_vars *vars)
 			if (!ft_strchr("10CEP", vars->map[y][x]))
 				return (0);
 			if (vars->map[y][x] == 'P')
-				vars->pos = (t_point){.x = x * TILE_SIZE, .y = y * TILE_SIZE};
+				vars->pos = (t_point){x * TILE_SIZE, y * TILE_SIZE};
 			if (vars->map[y][x] == 'C')
 				vars->total_collectibles++;
 			x++;

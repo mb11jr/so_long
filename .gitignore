@@ -1,5 +1,5 @@
 .vscode
 so_long
 *.[oa]
-mlx.h
+includes/mlx.h
 bonus

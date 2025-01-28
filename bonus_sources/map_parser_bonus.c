@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 12:11:32 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/27 15:21:02 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/28 11:40:15 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,22 +93,22 @@ static int	check_path(t_vars *vars)
 void	map_parser(t_vars *vars)
 {
 	if (!is_rectangular(vars))
-		free_and_exit(vars, 3, "The map is not rectangular!");
+		free_and_exit(vars, 4, "The map is not rectangular!");
 	if (!validate_map(vars))
-		free_and_exit(vars, 3,
-			"The map is invalid! There are unrecognizable characters.");
+		free_and_exit(vars, 5,
+			"The map has invalid characters! (other than 1,E,C,0,P,N)");
 	if (!enclosed_in_walls(vars))
-		free_and_exit(vars, 3, "The map is not enclosed in walls!");
+		free_and_exit(vars, 6, "The map is not enclosed in walls!");
 	if (!check_exit_start(vars))
-		free_and_exit(vars, 3,
+		free_and_exit(vars, 7,
 			"The map must contain exactly one player and one exit!");
 	if (vars->total_collectibles < 1)
-		free_and_exit(vars, 3, "The map must have at least one collectible!");
+		free_and_exit(vars, 8, "The map must have at least one collectible!");
 	if (!check_path(vars))
-		free_and_exit(vars, 3,
-			"No valid path in the map: the player can't reach the exit.");
-	if (vars->win_width / TILE_SIZE > 20)
-		free_and_exit(vars, 3, "The map exceeds the maximum window width!");
-	if (vars->win_height / TILE_SIZE > 10)
-		free_and_exit(vars, 3, "The map exceeds the maximum window height!");
+		free_and_exit(vars, 9,
+			"No valid path in the map: the player can't reach the exit!");
+	if (vars->win_width * TILE_SCALE > 1920)
+		free_and_exit(vars, 10, "The map exceeds the maximum window width!");
+	if (vars->win_height * TILE_SCALE > 1000)
+		free_and_exit(vars, 11, "The map exceeds the maximum window height!");
 }

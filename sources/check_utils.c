@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 12:30:56 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/28 09:49:28 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/28 12:01:19 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ static void	init_shape(t_vars *vars, t_shape *shape, t_point pos)
 			TILE_SIZE};
 	if (vars->map[pos.y][pos.x] == 'E')
 		*shape = (t_shape){pos.x * TILE_SIZE + 3, pos.y
-			* TILE_SIZE, TILE_SIZE
-			- 3 - 4, TILE_SIZE};
+			* TILE_SIZE, TILE_SIZE - 3 - 4, TILE_SIZE};
 	if (vars->map[pos.y][pos.x] == 'C')
 		*shape = (t_shape){pos.x * TILE_SIZE + 7, pos.y * TILE_SIZE + 11,
 			TILE_SIZE - 7 - 7, TILE_SIZE - 11 - 11};

@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 12:31:46 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/28 09:49:16 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/28 12:36:47 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,13 @@ static void	init_shape(t_vars *vars, t_shape *shape, t_point pos)
 			TILE_SIZE};
 	if (vars->map[pos.y][pos.x] == 'C')
 		*shape = (t_shape){pos.x * TILE_SIZE + 3, pos.y
-			* TILE_SIZE + 3, TILE_SIZE
-			- 3 - 3, TILE_SIZE - 3 - 3};
+			* TILE_SIZE + 3, TILE_SIZE - 3 - 3, TILE_SIZE - 3 - 3};
 	if (vars->map[pos.y][pos.x] == 'E')
 		*shape = (t_shape){pos.x * TILE_SIZE + 3, pos.y
-			* TILE_SIZE, TILE_SIZE
-			- 3 - 4, TILE_SIZE};
+			* TILE_SIZE, TILE_SIZE - 3 - 4, TILE_SIZE};
 	if (vars->map[pos.y][pos.x] == 'N')
 		*shape = (t_shape){pos.x * TILE_SIZE + 5, pos.y
-			* TILE_SIZE + 5, TILE_SIZE - 5 - 5,
-			TILE_SIZE - 5 - 6};
+			* TILE_SIZE + 5, TILE_SIZE - 5 - 5, TILE_SIZE - 5 - 6};
 }
 
 static void	check_tile(t_vars *vars, t_point pos)
@@ -50,7 +47,7 @@ static void	check_tile(t_vars *vars, t_point pos)
 	if (vars->map[pos.y][pos.x] == 'N')
 	{
 		ft_printf("\033[1;31m\nGAME OVER!\033[0m\n");
-		ft_free(vars, 4);
+		ft_free(vars, 1);
 	}
 	if (vars->map[pos.y][pos.x] == 'E'
 		&& vars->collected == vars->total_collectibles)

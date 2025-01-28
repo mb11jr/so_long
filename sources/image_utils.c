@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:36:31 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/27 18:06:55 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/28 12:24:30 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	put_img_to_baseimage(t_vars *vars, t_obj *src, int x, int y)
 			{
 				l = -1;
 				while (++l < TILE_SCALE)
-					put_pixel_img(vars, (i + x) * TILE_SCALE + l, (j + y)
+					put_pixel_img(vars, (x + i) * TILE_SCALE + l, (y + j)
 						* TILE_SCALE + k, get_pixel_img(src, i, j));
 			}
 		}

@@ -39,7 +39,7 @@ $(BONUS) : $(BONUS_OBJ)
 	@echo "█▀ █▀█ █░░ █▀█ █▄░█ █▀▀"
 	@echo "▄█ █▄█ █▄▄ █▄█ █░▀█ █▄█"
 	@touch $(BONUS)
-	@echo "Compiling source files...⏳"
+	@echo "Compiling bonus files...⏳"
 	@echo "Done ✅"
 	@echo "Compiling ft_printf, libft, and GNL source files...⏳"
 	@make -C ft_printf
