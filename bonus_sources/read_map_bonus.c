@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 14:34:15 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/28 10:58:45 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/28 12:43:46 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	error_msg(char *s)
 {
 	ft_printf("\033[1;31mError!\n\033[0m");
 	ft_printf("\033[1m%s\n\033[0m", s);
-	exit(1);
+	exit(12);
 }
 
 static int	map_height(t_vars *vars, int fd)
