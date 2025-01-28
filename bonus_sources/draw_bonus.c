@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 17:44:20 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/27 11:49:23 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/28 10:17:44 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ static void	draw_each(t_vars *vars, t_point pos)
 	if (vars->map[pos.x][pos.y] == 'C')
 		put_scaledimg_to_baseimage(vars, vars->collectible, (t_point){pos.y
 			* vars->collectible->width, pos.x * vars->collectible->height},
-			(t_point){6, 6});
+			(t_point){3 * TILE_SCALE, 3 * TILE_SCALE});
 	if (vars->map[pos.x][pos.y] == 'N')
 		put_scaledimg_to_baseimage(vars, vars->enemy, (t_point){pos.y
-			* vars->enemy->width, pos.x * vars->enemy->height}, (t_point){4,
-			4});
+			* vars->enemy->width, pos.x * vars->enemy->height},
+			(t_point){2 * TILE_SCALE, 2 * TILE_SCALE});
 }
 
 int	draw(t_vars *vars)
@@ -78,8 +78,9 @@ void	draw_count(t_vars *vars)
 	while (str[i])
 	{
 		img = vars->count[str[i] - '0'];
-		put_scaledimg_to_baseimage(vars, img, (t_point){(i * img->width)
-			+ (img->width * 0.5), (img->height * 0.5)}, (t_point){6, 5});
+		put_scaledimg_to_baseimage(vars, img,
+			(t_point){(i * img->width) + (img->width * 0.5),
+			(img->height * 0.25)}, (t_point){3 * TILE_SCALE, 3 * TILE_SCALE});
 		i++;
 	}
 	free(str);

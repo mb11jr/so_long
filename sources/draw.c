@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 17:44:20 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/27 11:24:29 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/28 10:01:21 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	draw_each(t_vars *vars, t_point pos)
 	if (vars->map[pos.x][pos.y] == 'C')
 		put_scaledimg_to_baseimage(vars, vars->collectible, (t_point){pos.y
 			* vars->collectible->width, pos.x * vars->collectible->height},
-			(t_point){6, 6});
+			(t_point){3 * TILE_SCALE, 3 * TILE_SCALE});
 }
 
 int	draw(t_vars *vars)

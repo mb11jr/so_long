@@ -33,7 +33,7 @@ $(NAME) : $(OBJ)
 	@echo "Done ✅"
 	@echo "Linking...⏳"
 	@$(CC) $(CFLAGS) $(OBJ) ./get_next_line/gnl.a ./ft_printf/libftprintf.a $(MLX_FLAGS) -o $(NAME)
-	@echo "Your game 🕹️ is ready"
+	@echo "Your game 🕹️  is ready"
 
 $(BONUS) : $(BONUS_OBJ)
 	@echo "█▀ █▀█ █░░ █▀█ █▄░█ █▀▀"
@@ -47,7 +47,7 @@ $(BONUS) : $(BONUS_OBJ)
 	@echo "Done ✅"
 	@echo "Linking...⏳"
 	$(CC) $(CFLAGS) $(BONUS_OBJ) ./get_next_line/gnl.a ./ft_printf/libftprintf.a $(MLX_FLAGS) -o $(NAME)
-	@echo "Your game 🕹️ is ready"
+	@echo "Your game 🕹️  is ready"
 
 clean:
 	@echo "Cleaning object files...🚮"

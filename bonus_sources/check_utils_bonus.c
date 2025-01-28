@@ -6,13 +6,13 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 12:31:46 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/27 18:24:33 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/28 09:49:16 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	check_overlap(t_shape a, t_shape b)
+static int	check_overlap(t_shape a, t_shape b)
 {
 	if (a.x + a.w <= b.x || a.x >= b.x + b.w)
 		return (0);
@@ -52,7 +52,8 @@ static void	check_tile(t_vars *vars, t_point pos)
 		ft_printf("\033[1;31m\nGAME OVER!\033[0m\n");
 		ft_free(vars, 4);
 	}
-	if (vars->map[pos.y][pos.x] == 'E' && vars->collected == vars->total_collectibles)
+	if (vars->map[pos.y][pos.x] == 'E'
+		&& vars->collected == vars->total_collectibles)
 	{
 		ft_printf("\033[1;32m\nCongratulations! YOU HAVE WON!\n\033[0m");
 		vars->moves++;

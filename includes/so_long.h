@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 14:30:52 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/27 18:18:03 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/01/28 10:14:07 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include "../ft_printf/include/ft_printf.h"
 # include "../get_next_line/get_next_line.h"
-# include "mlx.h"
 # include "structures.h"
+# include <mlx.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <fcntl.h>
@@ -25,9 +25,8 @@
 # include <unistd.h>
 
 # define TILE_SIZE 48
-# define PADDING 8
 # define SPEED 12
-# define TILE_SCALE 2
+# define TILE_SCALE 1
 # define BACKGROUND "./textures/background/background.xpm"
 # define WALL "./textures/background/wall.xpm"
 # define PLAYER_TO_RIGHT "./textures/player/player_to_right.xpm"
@@ -71,7 +70,5 @@ int				keypress_handler(int keycode, t_vars *vars);
 int				close_handler(t_vars *vars);
 void			load_images(t_vars *vars);
 int				check_collision(t_vars *vars, int x, int y);
-int				check_overlap(t_shape a, t_shape b);
-void			game_won(t_vars *vars);
 
 #endif
