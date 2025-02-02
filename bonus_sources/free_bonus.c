@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 10:34:42 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/27 14:48:41 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/02/02 10:33:07 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,27 @@ static void	ft_destroy_image(t_vars *vars, t_obj *obj)
 	free(obj);
 }
 
-static void	free_count_images(t_vars *vars)
+static void	free_sprites(t_vars *vars)
 {
 	int	i;
 
-	i = 0;
-	while (i < 10)
+	i = -1;
+	while (++i < 10)
 	{
 		if (vars->count[i])
 			ft_destroy_image(vars, vars->count[i]);
-		i++;
+	}
+	i = -1;
+	while(++i < 6)
+	{
+		if (vars->coins[i])
+			ft_destroy_image(vars, vars->coins[i]);
+	}
+	i = -1;
+	while(++i < 8)
+	{
+		if (vars->enemy[i])
+			ft_destroy_image(vars, vars->enemy[i]);
 	}
 }
 
@@ -43,14 +54,12 @@ static void	free_tiles(t_vars *vars)
 		ft_destroy_image(vars, vars->player_right);
 	if (vars->player_left)
 		ft_destroy_image(vars, vars->player_left);
-	if (vars->collectible)
-		ft_destroy_image(vars, vars->collectible);
 	if (vars->exit)
 		ft_destroy_image(vars, vars->exit);
 	if (vars->open_door)
 		ft_destroy_image(vars, vars->open_door);
-	if (vars->enemy)
-		ft_destroy_image(vars, vars->enemy);
+	// if (vars->enemy)
+	// 	ft_destroy_image(vars, vars->enemy);
 }
 
 void	ft_free(t_vars *vars, int status)
@@ -60,7 +69,7 @@ void	ft_free(t_vars *vars, int status)
 	if (vars->mlx)
 	{
 		free_tiles(vars);
-		free_count_images(vars);
+		free_sprites(vars);
 		if (vars->win)
 			mlx_destroy_window(vars->mlx, vars->win);
 		mlx_destroy_display(vars->mlx);

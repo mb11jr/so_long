@@ -6,7 +6,7 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 09:53:36 by mbentale          #+#    #+#             */
-/*   Updated: 2025/01/27 15:06:29 by mbentale         ###   ########.fr       */
+/*   Updated: 2025/02/02 09:23:59 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	main(int ac, char **av)
 	map_parser(&vars);
 	vars.mlx = mlx_init();
 	load_images(&vars);
-	load_count_images(&vars);
 	vars.win = mlx_new_window(vars.mlx, vars.win_width * TILE_SCALE,
 			vars.win_height * TILE_SCALE, "Welcome to my 2D game");
 	mlx_hook(vars.win, KeyPress, KeyPressMask, keypress_handler, &vars);
