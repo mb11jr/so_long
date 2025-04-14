@@ -117,8 +117,6 @@ Images were loaded with MiniLibX and used to display:
 * Managing memory and graphics using MiniLibX
 
 ---
----
----
----
----
+
+
 Made with 💻 at 1337 School | Mohamed Bentaleb
